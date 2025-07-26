@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Golden Fabrics - Place Order</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+/* Custom scrollbar for cart panel */
+#cartPanel::-webkit-scrollbar {
+    width: 6px;
+  }
+  #cartPanel::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 3px;
+  }
+  #cartPanel::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .cart-page{
+margin: 80px auto;
+}
+
+table{
+width: 100%;
+border-collapse: collapse;
+}
+.cart-info{
+display: flex;
+flex-wrap: wrap;
+}
+th{
+text-align: left;
+padding: 5px;
+color: #fff;
+background: #ff523b;
+font-weight: normal;
+}
+td{
+padding: 10px 5px;
+}
+td input{
+width: 40px;
+height: 30px;
+padding: 5px;
+}
+td a{
+color: #ff523b;
+font-size: 12px;
+}
+
+td img{
+width: 80px;
+height: 80px;
+margin-right: 10px;
+}
+total-price{
+display: flex;
+justify-content: flex-end;
+}
+.total-price table{
+border-top: 3px solid #ff523b;
+width: 500px;
+max-width: 500px;
+}
+td:last-child{
+text-align: right;
+}
+th:last-child{
+text-align: right;
+}
+
+.sidenav {
+height: 100%;
+width: 0;
+position: fixed;
+z-index: 1;
+top: 0;
+left: 0;
+background-color: #111;
+overflow-x: hidden;
+transition: 0.5s;
+padding-top: 60px;
+}
+
+.sidenav a {
+padding: 8px 8px 8px 32px;
+text-decoration: none;
+font-size: 25px;
+color: #818181;
+display: block;
+transition: 0.3s;
+padding-top: -25px;
+}
+
+.sidenav a:hover {
+color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+position: absolute;
+top: 0;
+right: 25px;
+font-size: 36px;
+margin-left: 50px;
+font-family: 'poppins';
+}
+.shopping_cart{
+  text-align: center;
+  color: #f1f1f1;
+  margin-top: 50px;
+  font-size: 30px;
+  font-weight: 100;
+  margin-bottom: -60px;
+}
+
+/* CSS */
+.button-24 {
+  background: #ff484294;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button-24:hover,
+.button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+.button-24:active {
+  opacity: .5;
+}
+
+
+
+        </style>
+        </head>
+        <body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
+          
+        
+        <!-- Header -->
+  <header class="flex items-center justify-between p-4 bg-gray-800 sticky top-0 z-20">
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="home.html" class="fas fa-home"> Home</a><br>
+      <a href="aboutus.html" class="fas fa-user"> About Us</a><br>
+      <a href="contactus.html" class="fas fa-phone"> Contact Us</a>
+    </div>
+    <span aria-label="Menu" class="text-white text-3xl" style="font-size:30px;cursor:pointer;margin-left:15px;" onclick="openNav()">&#9776;</span>
+    <div class="font-bold text-xl tracking-wide">GOLDEN FABRICS</div>
+    
+    <!-- Cart Icon with count -->
+    <div class="relative cursor-pointer" id="cartIcon" title="View Cart">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" 
+              stroke-linejoin="round" 
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6m5-6v6m4-6v6m5-12h-6" />
+      </svg>
+      <span id="cartCount" class="absolute -top-1 -right-1 bg-red-600 rounded-full text-xs w-5 h-5 flex items-center justify-center font-semibold">0</span>
+    </div>
+  </header>
+
+  <h1 class="shopping_cart">SHOPPING CART</h1>
+
+          <div class="small-container cart-page">
+            <table id="cart-table" >
+            <tr>
+            <th style="text-align: center;"> Select </th>
+            <th style="text-align: center;"> Product </th>
+            <th style="text-align: center;"> Product Name </th>        
+            <th style="text-align: center;"> Quantity</th>
+            <th style="text-align: center;"> Subtotal</th>
+            <th style="text-align: center;"> Action</th>
+            </tr>
+
+            
+              <tbody id="cart-table-body">
+                <!-- Cart items will be populated here dynamically -->
+            </tbody>
+            </table>
+            
+
+            <div class="total-price" id="summary">
+              <table>
+                <tr>
+                  <td>Subtotal</td>
+                  <td id="subtotal"></td>
+                </tr>
+                <tr>
+                  <td>Tax (5%)</td>
+                  <td id="tax"></td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td id="total"></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+<div style="text-align: center; margin-top: -80px;">
+  <!-- HTML !-->
+<button class="button-24" role="button" id="placeOrderBtn">Place Order</button>
+ </div>
+<br><br><br>
+  <!-- Cart Panel (initially hidden) -->
+  <aside id="cartPanel" 
+         class="fixed top-16 right-4 w-90 max-h-100 bg-gray-800 border border-yellow-400 rounded-lg shadow-lg overflow-auto p-4 hidden z-30">
+    <h2 class="text-yellow-400 text-lg font-bold mb-4">Your Cart</h2>
+    <div id="cartItems" class="flex flex-col gap-4 max-h-72 overflow-auto"></div>
+    <p id="emptyCartMsg" class="text-gray-400 text-center">Your cart is empty.</p>
+    <br>
+    <a href="place-order.html" class="text-yellow-400 text-lg font-bold mb-4" style="margin-left: 95px;">Place Order</a>
+  </aside>
+
+  <script>
+    // Retrieve cart items from local storage
+    function loadCart() {
+        return JSON.parse(localStorage.getItem('cartItems')) || [];
+    }
+
+    // Save cart items to local storage
+    function saveCart(cartItems) {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+
+    // Initial cart items
+    let cartItems = loadCart();
+    
+    // Render cart on page load
+    function renderCart() {
+        const cartItemsContainer = document.getElementById('cart-table-body');
+        const cartCount = document.getElementById('cartCount');
+        const emptyCartMsg = document.getElementById('emptyCartMsg');
+        const subtotalElem = document.getElementById('subtotal');
+        const taxElem = document.getElementById('tax');
+        const totalElem = document.getElementById('total');
+        let subtotal = 0;
+
+        // Clear current items
+        cartItemsContainer.innerHTML = '';
+
+        if (cartItems.length === 0) {
+            emptyCartMsg.style.display = 'block';
+        } else {
+            emptyCartMsg.style.display = 'none';
+            cartItems.forEach((item, index) => {
+                const itemSubtotal = item.quantity * 2000; // Assuming price is Rs. 2000 per 10 meters
+                subtotal += itemSubtotal;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="text-align: center;">
+                        <input type="checkbox" class="item-checkbox" data-index="${index}">
+                    </td>
+                    <td style="display: grid; place-items: center;">
+                        <img src="${item.image}" class="rounded-lg" style="width: 80px; height: 80px;">
+                        <td style="text-align: center;">${item.name} </td>
+                    </td>
+                    <td style="text-align: center;">${item.quantity}</td>
+                    <td style="text-align: center;">Rs. ${itemSubtotal.toFixed(2)}</td>
+                    <td style="text-align: center;"><button class="remove-btn" style="color: red;" onclick="removeFromCart(${index})">Remove</button></td>
+                `;
+                cartItemsContainer.appendChild(row);
+            });
+        }
+
+        // Calculate tax and total
+        const tax = subtotal * 0.05;  // 10% tax
+        const total = subtotal + tax;
+
+        // Update displayed values
+        subtotalElem.innerText = `Rs. ${subtotal.toFixed(2)}`;
+        taxElem.innerText = `Rs. ${tax.toFixed(2)}`;
+        totalElem.innerText = `Rs. ${total.toFixed(2)}`;
+
+        // Update cart count badge
+        cartCount.textContent = cartItems.length;
+
+        // Render cart items in the cart panel
+        renderCartPanel();
+    }
+
+    // Function to render cart items in the cart panel
+    function renderCartPanel() {
+        const cartItemsContainer = document.getElementById('cartItems');
+        cartItemsContainer.innerHTML = ''; // Clear previous items
+        const emptyCartMsg = document.getElementById('emptyCartMsg');
+
+        if (cartItems.length === 0) {
+            emptyCartMsg.style.display = 'block';
+        } else {
+            emptyCartMsg.style.display = 'none';
+            cartItems.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('flex', 'items-center', 'gap-3');
+
+                // Image Thumbnail
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.name + ' image';
+                img.classList.add('w-12', 'h-12', 'object-cover', 'rounded');
+
+                // Name span
+                const name = document.createElement('span');
+                name.textContent = item.name;
+                name.classList.add('flex-grow', 'text-white', 'font-semibold');
+
+                // Quantity span
+                const quantity = document.createElement('span');
+                quantity.textContent = 'Qty. ' + item.quantity;
+                quantity.classList.add('flex-grow', 'text-white', 'font-semibold');
+
+                // Price span
+                const itemSubtotal = item.quantity * 2000; // Assuming price is Rs. 2000 per 10 meters
+                const price = document.createElement('span');
+                price.textContent = 'Rs. ' + itemSubtotal.toFixed(2);
+                price.classList.add('flex-grow', 'text-white', 'font-semibold');
+
+                // Remove button
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = '×';
+                removeBtn.title = 'Remove from cart';
+                removeBtn.classList.add('text-red-500', 'text-xl', 'font-bold', 'hover:text-red-700');
+                removeBtn.onclick = () => { removeFromCart(index); }; // Pass the correct index
+
+                itemDiv.appendChild(img);
+                itemDiv.appendChild(name);
+                itemDiv.appendChild(quantity);
+                itemDiv.appendChild(price);
+                itemDiv.appendChild(removeBtn);
+                cartItemsContainer.appendChild(itemDiv);
+            });
+        }
+    }
+
+    // Function to remove item from cart
+    function removeFromCart(index) {
+        cartItems.splice(index, 1);
+        saveCart(cartItems);
+        renderCart(); // Update the main cart display
+        renderCartPanel(); // Update the cart panel display
+    }
+    
+    // Function to handle Place Order button click
+    document.getElementById('placeOrderBtn').addEventListener('click', () => {
+        const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
+        if (selectedCheckboxes.length === 0) {
+            alert('Please select at least one item.');
+            return;
+        }
+
+        let selectedItems = [];
+        selectedCheckboxes.forEach(checkbox => {
+            const index = checkbox.getAttribute('data-index');
+            const item = cartItems[index];
+            selectedItems.push(item); // Add selected item to the array
+        });
+
+        // Store selected items in local storage
+        localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+
+        // Redirect to Address page
+        window.location.href = 'Address.html';
+    });
+
+    // Initial render
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCart();
+    });
+
+    // Cart icon toggle
+    const cartIcon = document.getElementById('cartIcon');
+    const cartPanel = document.getElementById('cartPanel');
+
+    cartIcon.addEventListener('click', () => {
+        cartPanel.classList.toggle('hidden');
+    });
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+</body>
+</html>

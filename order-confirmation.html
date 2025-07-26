@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #1a202c;
+            color: white;
+        }
+        .confirmation-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="confirmation-box p-8 max-w-md w-full text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <h1 class="text-2xl font-bold mb-4">Order Confirmed!</h1>
+        <p class="mb-6">Thank you for your purchase. Your order has been received.</p>
+        
+        <div id="orderDetails" class="text-left mb-6 p-4 bg-gray-800 rounded">
+            <!-- Order details will be inserted here -->
+        </div>
+        
+        <a href="home.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">
+            Back to Home
+        </a>
+    </div>
+
+    <script>
+        // Display order details from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderDetails = JSON.parse(localStorage.getItem('lastOrder')) || {};
+            const orderDetailsDiv = document.getElementById('orderDetails');
+            
+            if (orderDetails && orderDetails.orderId) {
+                orderDetailsDiv.innerHTML = `
+                    <h3 class="font-bold text-lg mb-2">Order #${orderDetails.orderId}</h3>
+                    <p><strong>Name:</strong> ${orderDetails.name}</p>
+                    <p><strong>Mobile:</strong> ${orderDetails.mobile}</p>
+                    <p><strong>Email:</strong> ${orderDetails.email}</p>
+                    <p><strong>Total:</strong> Rs. ${orderDetails.total}</p>
+                    <p><strong>Payment Method:</strong> ${orderDetails.paymentMethod}</p>
+                    <p class="mt-4">We've sent a confirmation to ${orderDetails.email}</p>
+                `;
+            } else {
+                orderDetailsDiv.innerHTML = '<p>Order details not available</p>';
+            }
+        });
+    </script>
+</body>
+</html>

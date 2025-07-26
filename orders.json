@@ -1,0 +1,31 @@
+[
+  {
+    "id": "5e2d0f76-f506-4fa7-851c-b64530e2eb75",
+    "name": "Tushar Patil",
+    "mobile": "9090909088",
+    "email": "metusharpatil8@gmail.com",
+    "address": "hello fabric",
+    "paymentMethod": "cod",
+    "items": [
+      {
+        "name": "Cotton",
+        "image": "images/cotton.jpg",
+        "quantity": 1
+      },
+      {
+        "name": "Nylon",
+        "image": "images/nylon.jpg",
+        "quantity": 2
+      }
+    ],
+    "subtotal": 6000,
+    "tax": 300,
+    "total": 6300,
+    "date": "2025-07-23T16:09:04.478Z",
+    "orderId": "1753286944478",
+    "status": "Received",
+    "createdAt": "2025-07-23T16:09:04.532Z",
+    "updatedAt": "2025-07-23T16:09:04.532Z",
+    "screenshot": null
+  }
+]

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Fabric - Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6d5b4f;
+            --secondary-color: #d9c7b8;
+            --accent-color: #c7a17a;
+            --text-color: #333;
+            --light-text: #f8f8f8;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #080708;
+            color: var(--text-color);
+        }
+
+        .login-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .login-image {
+            flex: 1;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('images/FABRIC_IMG.png') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            color: var(--light-text);
+            position: relative;
+        }
+
+        .login-image h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .login-image p {
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
+
+        .login-form-container {
+         background-color: #59473d;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo i {
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+
+        .logo h2 {
+            margin-top: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon input {
+            width: 100%;
+            padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .input-with-icon input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(199, 161, 122, 0.2);
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #59473d;
+        }
+
+        .feedback-message {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+
+        .success {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: var(--success-color);
+            display: block;
+        }
+
+        .error {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: var(--error-color);
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+
+            .login-image {
+                padding: 4rem 2rem;
+                text-align: center;
+            }
+
+            .login-image p {
+                max-width: 100%;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+ <!-- Centered Header -->
+    <header class="flex justify-center items-center p-4 bg-gray-800 sticky top-0 z-20">
+        <div class="font-bold text-xl tracking-wider text-white">GOLDEN FABRICS</div>
+    </header>
+
+    <div class="login-container">
+        <div class="login-image">
+            <h1>Register</h1>
+            <p>Create an account to access your personalized dashboard.</p>
+        </div>
+        <div class="login-form-container">
+            <form class="login-form" id="registerForm">
+                <div class="logo">
+                    <i class="fas fa-tshirt"></i>
+                    <h2>Golden Fabric</h2>
+                </div>
+                
+                <div id="feedbackMessage" class="feedback-message"></div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Email or Mobile</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="registerEmail" name="registerEmail" placeholder="Enter your email or mobile" required>
+                    </div>
+                    <button type="button" id="sendOtpBtn" class="login-btn" style="margin-top: 10px; padding: 0.6rem 1rem; width: auto;">Send OTP</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="otp">OTP Verification</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-key"></i>
+                        <input type="text" id="otp" name="otp" placeholder="Enter OTP" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Set Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="registerPassword" name="registerPassword" placeholder="Set your password" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn">Sign Up</button>
+                
+                <div class="register-link">
+                    <p>Already have an account? <a href="LoginUser.html">Login here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+            const feedbackMessage = document.getElementById('feedbackMessage');
+
+            // Add OTP button click handler
+            document.getElementById('sendOtpBtn').addEventListener('click', async function() {
+                const emailOrMobile = document.getElementById('registerEmail').value;
+                
+                if (!emailOrMobile) {
+                    showFeedback('Please enter email or mobile first', 'error');
+                    return;
+                }
+
+                // Send OTP request to the backend
+        const response = await fetch('http://localhost:5000/api/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ emailOrMobile })
+    });
+
+                const result = await response.json();
+                if (result.success) {
+                    showFeedback('OTP sent to ' + emailOrMobile, 'success');
+                } else {
+                    showFeedback(result.message, 'error');
+                }
+            });
+
+            registerForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const emailOrMobile = document.getElementById('registerEmail').value;
+                const otp = document.getElementById('otp').value;
+                const password = document.getElementById('registerPassword').value;
+
+                // Client-side validation
+                if (!emailOrMobile || !otp || !password) {
+                    showFeedback('Please fill in all fields', 'error');
+                    return;
+                }
+
+                // Send registration request to the backend
+        const response = await fetch('http://localhost:5000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailOrMobile, password, otp })
+    });
+
+                const result = await response.json();
+                if (result.success) {
+                    showFeedback('Registration successful! Redirecting to login...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'LoginUser.html';
+                    }, 1500);
+                } else {
+                    showFeedback(result.message, 'error');
+                }
+            });
+
+            function showFeedback(message, type) {
+                feedbackMessage.textContent = message;
+                feedbackMessage.className = 'feedback-message ' + type;
+                feedbackMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

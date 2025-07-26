@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Add in <head> section -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fabric Shop - Address & Payment</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+ .sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  padding-top: -25px;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  font-family: 'poppins';
+}
+  
+  .cart-page {
+    margin: 80px auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th {
+    text-align: left;
+    padding: 5px;
+    color: #fff;
+    background: #ff523b;
+    font-weight: normal;
+  }
+  
+  td {
+    padding: 10px 5px;
+  }
+  
+  .button-24 {
+    background: #f8f803de;
+    border: 1px solid #fffb00;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+  }
+  
+  .button-24:hover,
+  .button-24:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #fffb00;
+  }
+  
+  .button-24:active {
+    opacity: .5;
+  }
+  
+  .spinner {
+    animation: spin 1s linear infinite;
+    display: inline-block;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .input-field {
+    background-color: #2d3748;
+    color: white;
+    border: 1px solid #4a5568;
+    border-radius: 4px;
+    padding: 8px 12px;
+    width: 100%;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.3);
+  }
+  
+  .order-table {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+
+  
+  .order-table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+</style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between p-4 bg-gray-800 sticky top-0 z-20">
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="home.html" class="fas fa-home"> Home</a><br>
+      <a href="aboutus.html" class="fas fa-user"> About Us</a><br>
+      <a href="contactus.html" class="fas fa-phone"> Contact Us</a>
+    </div>
+    <span aria-label="Menu" class="text-white text-3xl" style="font-size:30px;cursor:pointer;margin-left:15px;" onclick="openNav()">&#9776;</span>
+    <div class="font-bold text-xl tracking-wide">GOLDEN FABRICS</div>
+    
+    <!-- Cart Icon with count -->
+    <div class="relative cursor-pointer" id="cartIcon" title="View Cart">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" 
+              stroke-linejoin="round" 
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6m5-6v6m4-6v6m5-12h-6" />
+      </svg>
+      <span id="cartCount" class="absolute -top-1 -right-1 bg-red-600 rounded-full text-xs w-5 h-5 flex items-center justify-center font-semibold">0</span>
+    </div>
+  </header>
+  <div class="text-center mt-10 mb-6">
+    <h1 class="text-3xl font-light">ADDRESS & PAYMENT</h1>
+  </div>
+
+<div class="container mx-auto px-4 max-w-4xl">
+    <div class="order-table p-6 mb-8">
+      <table class="w-full">
+        <tr>
+          <th class="text-center py-3">Product</th>
+          <th class="text-center py-3">Product Name</th>
+          <th class="text-center py-3">Quantity</th>
+          <th class="text-center py-3">Subtotal</th>
+        </tr>
+        <tbody id="cart-table-body">
+          <!-- Cart items will be populated here -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bg-gray-800 p-6 rounded-lg mb-8">
+      <h2 class="text-xl font-semibold mb-4 text-yellow-400">Customer Information</h2>
+      <table class="w-full">
+        <tr>
+          <td class="py-2">*Name</td>
+          <td class="py-2">
+            <input type="text" id="cname" name="Name" placeholder="Your full name" class="input-field">
+          </td>
+        </tr>
+        <tr>
+          <td class="py-2">*Mobile</td>
+          <td class="py-2">
+            <input type="number" id="mobile" name="Mobile" placeholder="10-digit mobile number" class="input-field" onKeyPress="if(this.value.length==10) return false;">
+          </td>
+        </tr>
+        <tr>
+          <td class="py-2">*Email</td>
+          <td class="py-2">
+            <input type="email" id="email" name="Email" placeholder="your.email@example.com" class="input-field">
+          </td>
+        </tr>
+        <tr>
+          <td class="py-2">Address</td>
+          <td class="py-2">
+            <textarea id="Address" name="Address" placeholder="Full shipping address" rows="4" class="input-field" required></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td class="py-2">*Payment</td>
+          <td class="py-2">
+            <select id="paymentMethod" onchange="togglePaymentOptions()" class="input-field">
+              <option value="cod">Cash on Delivery</option>
+              <option value="online">Online Payment</option>
+            </select>
+          </td>
+        </tr>
+<tr id="onlinePaymentOptions" class="hidden">
+  <td class="py-2">QR Code</td>
+  <td class="py-2">
+    <div class="bg-white p-2 rounded inline-block">
+      <div class="w-48 h-48 bg-gray-200 border-2 border-dashed rounded-xl flex items-center justify-center text-gray-500">
+        <img src="images/QRCODE.jpeg" alt="Payment QR code for scanning with mobile banking apps" class="w-full h-full object-contain" />
+      </div>
+    </div>
+  </td>
+</tr>
+
+
+        <tr id="screenshotUpload" class="hidden">
+          <td class="py-2">Upload Screenshot</td>
+          <td class="py-2">
+            <input type="file" id="screenshot" name="screenshot" accept="image/*" class="input-field py-1">
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="bg-gray-800 p-6 rounded-lg mb-8">
+      <h2 class="text-xl font-semibold mb-4 text-yellow-400">Order Summary</h2>
+      <table class="w-full">
+        <tr>
+          <td class="py-2">Subtotal</td>
+          <td class="py-2 text-right" id="subtotal">Rs. 0.00</td>
+        </tr>
+        <tr>
+          <td class="py-2">Tax (5%)</td>
+          <td class="py-2 text-right" id="tax">Rs. 0.00</td>
+        </tr>
+        <tr>
+          <td class="py-2">
+            <span class="bg-red-700 px-4 py-1 rounded">Total</span>
+          </td>
+          <td class="py-2 text-right">
+            <span class="bg-red-700 px-4 py-1 rounded" id="total">Rs. 0.00</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="text-center mb-10">
+      <button id="send" type="button" class="button-24 px-8 py-3 text-lg" onclick="sendOrderdetail()">
+        Place Order
+      </button>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Main content container -->
+  <main class="flex-grow container mx-auto p-4 flex flex-col md:flex-row gap-8 justify-center" >
+  </main>
+  
+  <!-- Cart Panel (initially hidden) -->
+  <aside id="cartPanel" 
+         class="fixed top-16 right-4 w-90 max-h-100 bg-gray-800 border border-yellow-400 rounded-lg shadow-lg overflow-auto p-4 hidden z-30">
+    <h2 class="text-yellow-400 text-lg font-bold mb-4">Your Cart</h2>
+    <div id="cartItems" class="flex flex-col gap-4 max-h-72 overflow-auto"></div>
+    <p id="emptyCartMsg" class="text-gray-400 text-center">Your cart is empty.</p>
+    <br>
+    <a href="place-order.html" class="text-yellow-400 text-lg font-bold mb-4" style="margin-left: 95px;">Place Order</a>
+  </aside>
+
+
+  <script>
+    
+    // Elements references
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    const cartPanel = document.getElementById('cartPanel');
+    const cartIcon = document.getElementById('cartIcon');
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const emptyCartMsg = document.getElementById('emptyCartMsg');
+    const fabricPrice = 2000; // Store as a number for calculations
+
+    // Cart data array
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    // Function to render cart items inside cartPanel
+    function renderCart() {
+        // Clear current items
+        cartItemsContainer.innerHTML = '';
+        let subtotal = 0; // Total for all items
+        
+        if (cartItems.length === 0) {
+            emptyCartMsg.style.display = 'block';
+        } else {
+            emptyCartMsg.style.display = 'none';
+            cartItems.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('flex', 'items-center', 'gap-3');
+
+                // Image Thumbnail
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.name + ' image';
+                img.classList.add('w-12', 'h-12', 'object-cover', 'rounded');
+
+                // Name span
+                const name = document.createElement('span');
+                name.textContent = item.name;
+                name.classList.add('flex-grow', 'text-white', 'font-semibold');
+
+                // Quantity span
+                const quantity = document.createElement('span');
+                quantity.textContent ='Qty. '+ item.quantity;
+                quantity.classList.add('flex-grow', 'text-white', 'font-semibold');
+
+                // Subtotal calculation
+                const itemSubtotal = item.quantity * fabricPrice;
+                subtotal += itemSubtotal;
+
+                // Price span
+                const price = document.createElement('span');
+                price.textContent = 'Rs. ' + itemSubtotal;
+                price.classList.add('flex-grow', 'text-white', 'font-semibold');
+
+                // Remove button
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = '×';
+                removeBtn.title = 'Remove from cart';
+                removeBtn.classList.add('text-red-500', 'text-xl', 'font-bold', 'hover:text-red-700');
+                removeBtn.onclick = () => { removeFromCart(index); };
+
+                itemDiv.appendChild(img);
+                itemDiv.appendChild(name);
+                itemDiv.appendChild(quantity);
+                itemDiv.appendChild(price);
+                itemDiv.appendChild(removeBtn);
+                cartItemsContainer.appendChild(itemDiv);
+            });
+        }
+
+        // Update cart count badge
+        cartCount.textContent = cartItems.length;
+
+        // Update subtotal in the cart
+        const subtotalElem = document.createElement('div');
+        subtotalElem.textContent = 'Subtotal: Rs. ' + subtotal;
+        subtotalElem.classList.add('text-yellow-400', 'font-bold');
+        cartItemsContainer.appendChild(subtotalElem);
+    }
+
+    // Function to remove item from cart by index
+    function removeFromCart(index) {
+        cartItems.splice(index, 1);
+        localStorage.setItem('cartItems', JSON.stringify(cartItems)); // Update local storage
+        renderCart();
+    }
+
+    // Function to render selected items on Address page
+    function renderSelectedItems() {
+        const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+        const cartItemsContainer = document.getElementById('cart-table-body');
+        const subtotalElem = document.getElementById('subtotal');
+        const taxElem = document.getElementById('tax');
+        const totalElem = document.getElementById('total');
+        let subtotal = 0;
+
+        cartItemsContainer.innerHTML = '';
+
+        if (selectedItems.length === 0) {
+            cartItemsContainer.innerHTML = '<tr><td colspan="4" class="text-center">No items selected.</td></tr>';
+        } else {
+            selectedItems.forEach((item) => {
+                const itemSubtotal = item.quantity * fabricPrice; // Assuming price is Rs. 2000 per 10 meters
+                subtotal += itemSubtotal;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="display: grid; place-items: center;">
+                        <img src="${item.image}" class="rounded-lg"  style="width: 80px; height: 80px; margin-right: 10px;"></td>
+                       <td style="text-align: center;"> <span>${item.name}</span>
+                    </td>
+              <td style="text-align: center;">${item.quantity}</td>
+                    <td style="text-align: center;">Rs. ${itemSubtotal.toFixed(2)}</td>
+                `;
+                cartItemsContainer.appendChild(row);
+
+            });
+        }
+
+        // Calculate tax and total
+        const tax = subtotal * 0.05;  // 10% tax
+        const total = subtotal + tax;
+
+        // Update displayed values
+        subtotalElem.innerText = `Rs. ${subtotal.toFixed(2)}`;
+        taxElem.innerText = `Rs. ${tax.toFixed(2)}`;
+        totalElem.innerText = `Rs. ${total.toFixed(2)}`;
+    }
+
+    // Function to remove item from selected items
+    function removeFromSelectedItems(itemName) {
+        let selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+        selectedItems = selectedItems.filter(item => item.name !== itemName);
+        localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+        renderSelectedItems();
+    }
+
+    // Toggle cart panel visibility on cart icon click
+    cartIcon.addEventListener('click', () => {
+        cartPanel.classList.toggle('hidden');
+    });
+
+    // Initial render
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCart();
+        renderSelectedItems();
+    });
+
+    // Add event listener to button
+    //addToCartBtn.addEventListener('click', addToCart);
+
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+
+
+   <script>
+
+// [Keep all your existing cart functions...]
+
+async function sendOrderdetail() {
+    // Get all required field values
+    const name = document.getElementById("cname").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const address = document.getElementById("Address").value.trim();
+    const paymentMethod = document.getElementById("paymentMethod").value;
+    const screenshot = document.getElementById("screenshot");
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    
+    // Get calculated totals
+    const subtotal = parseFloat(document.getElementById("subtotal").innerText.replace('Rs. ', ''));
+    const tax = parseFloat(document.getElementById("tax").innerText.replace('Rs. ', ''));
+    const total = parseFloat(document.getElementById("total").innerText.replace('Rs. ', ''));
+    
+    // Validate each field
+    if (!name) {
+        alert("Please enter your name");
+        document.getElementById("cname").focus();
+        return false;
+    }
+    
+    if (!mobile) {
+        alert("Please enter your mobile number");
+        document.getElementById("mobile").focus();
+        return false;
+    } else if (mobile.length !== 10 || isNaN(mobile)) {
+        alert("Please enter a valid 10-digit mobile number");
+        document.getElementById("mobile").focus();
+        return false;
+    }
+    
+    if (!email) {
+        alert("Please enter your email address");
+        document.getElementById("email").focus();
+        return false;
+    } else if (!validateEmail(email)) {
+        alert("Please enter a valid email address");
+        document.getElementById("email").focus();
+        return false;
+    }
+    
+    if (!address) {
+        alert("Please enter your address");
+        document.getElementById("Address").focus();
+        return false;
+    }
+    
+    // Additional validation for online payment
+    if (paymentMethod === "online") {
+        if (!screenshot.files || screenshot.files.length === 0) {
+            alert("Please upload payment screenshot for online payment");
+            return false;
+        }
+    }
+    
+    // Get the submit button and set loading state
+    const sendButton = document.getElementById('send');
+    const originalText = sendButton.textContent;
+    sendButton.disabled = true;
+        // Replace the button text with a spinner during processing
+        sendButton.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Processing...';
+    
+    try {
+        // First check if server is reachable (with better error handling)
+        let serverAvailable = false;
+        try {
+            const healthCheck = await fetch('http://localhost:5000/api/health', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (healthCheck.ok) {
+                const healthData = await healthCheck.json();
+                if (healthData.status === 'healthy') {
+                    serverAvailable = true;
+                }
+            }
+        } catch (healthError) {
+            console.warn("Backend health check failed:", healthError);
+            // Continue with local storage fallback
+        }
+
+        // Prepare order data
+        const orderData = {
+            name,
+            mobile,
+            email,
+            address,
+            paymentMethod,
+            items: cartItems,
+            subtotal,
+            tax,
+            total,
+            date: new Date().toISOString(),
+            orderId: Date.now().toString() // Generate a simple order ID
+        };
+
+        if (serverAvailable) {
+            // Create FormData for file upload
+            const formData = new FormData();
+            formData.append('data', JSON.stringify(orderData));
+            
+            if (paymentMethod === "online" && screenshot.files[0]) {
+                formData.append('screenshot', screenshot.files[0]);
+            }
+
+            // Send the order request with timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
+            
+            const response = await fetch('http://localhost:5000/api/orders', {
+                method: 'POST',
+                body: formData,
+                signal: controller.signal
+            });
+            
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+                throw new Error("Failed to place order with server");
+            }
+            
+            const result = await response.json();
+            orderData.orderId = result.orderId || orderData.orderId;
+        }
+
+        // Store order details for confirmation page
+        localStorage.setItem('lastOrder', JSON.stringify(orderData));
+        localStorage.removeItem('cartItems');
+        
+        alert("Order placed successfully!" + (serverAvailable ? "" : " (Saved locally)"));
+        window.location.href = 'order-confirmation.html';
+        
+    } catch (error) {
+        console.error("Order submission error:", error);
+        alert(`Error: ${error.message}`);
+    } finally {
+        // Reset button state
+        sendButton.disabled = false;
+        sendButton.textContent = originalText;
+    }
+}
+
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+function togglePaymentOptions() {
+    const paymentMethod = document.getElementById("paymentMethod").value;
+    document.getElementById("onlinePaymentOptions").style.display = 
+        paymentMethod === "online" ? "table-row" : "none";
+    document.getElementById("screenshotUpload").style.display = 
+        paymentMethod === "online" ? "table-row" : "none";
+}
+
+</script>
+      
+</body> 
+</html>
+<!--
+npm init -y
+npm install express cors multer uuid
+mkdir uploads
+node server.js
+                     //After the server starts, you should see:
+                     Server running on http://localhost:5000
+                     API endpoint: http://localhost:5000/api/orders
+
+or
+
+npm install express cors multer uuid
+node server.js
+curl http://localhost:5000/api/health
+-->
+

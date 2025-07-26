@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fabric Shop - Viscose</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Custom scrollbar for cart panel */
+  #cartPanel::-webkit-scrollbar {
+    width: 6px;
+  }
+  #cartPanel::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 3px;
+  }
+  #cartPanel::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  .sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  padding-top: -25px;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  font-family: 'poppins';
+}
+</style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between p-4 bg-gray-800 sticky top-0 z-20">
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="home.html" class="fas fa-home"> Home</a><br>
+      <a href="aboutus.html" class="fas fa-user"> About Us</a><br>
+      <a href="contactus.html" class="fas fa-phone"> Contact Us</a>
+    </div>
+    <span aria-label="Menu" class="text-white text-3xl" style="font-size:30px;cursor:pointer;margin-left:15px;" onclick="openNav()">&#9776;</span>
+    <div class="font-bold text-xl tracking-wide">GOLDEN FABRICS</div>
+    
+    <!-- Cart Icon with count -->
+    <div class="relative cursor-pointer" id="cartIcon" title="View Cart">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" 
+              stroke-linejoin="round" 
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6m5-6v6m4-6v6m5-12h-6" />
+      </svg>
+      <span id="cartCount" class="absolute -top-1 -right-1 bg-red-600 rounded-full text-xs w-5 h-5 flex items-center justify-center font-semibold">0</span>
+    </div>
+  </header>
+
+<body class="min-h-screen bg-gray-900 text-white p-8">
+    <h1 class="text-3xl font-bold mb-8" style="text-align: center; font-size: 40px; margin-top: 50px;">Your Orders</h1>
+    
+    <div id="ordersList" class="space-y-4" style="text-align: center;">
+        <!-- Orders will be listed here -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const orders = JSON.parse(localStorage.getItem('orderHistory')) || [];
+            const ordersList = document.getElementById('ordersList');
+            
+            if (orders.length === 0) {
+                ordersList.innerHTML = '<p>No orders found</p>';
+                return;
+            }
+            
+            ordersList.innerHTML = orders.map(order => `
+                <div class="p-4 bg-gray-800 rounded-lg">
+                    <h3 class="font-bold">Order #${order.orderId}</h3>
+                    <p>Date: ${new Date(order.date).toLocaleString()}</p>
+                    <p>Total: Rs. ${order.total}</p>
+                    <p>Status: ${order.status || 'Processing'}</p>
+                </div>
+            `).join('');
+        });
+    </script>
+</body>
+</html>
