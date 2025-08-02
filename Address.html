@@ -288,171 +288,170 @@
   </aside>
 
 
-  <script>
+ <script>
+  // Elements references
+  const cartPanel = document.getElementById("cartPanel");
+  const cartIcon = document.getElementById("cartIcon");
+  const cartItemsContainer = document.getElementById("cartItems");
+  const cartCount = document.getElementById("cartCount");
+  const emptyCartMsg = document.getElementById("emptyCartMsg");
+  const fabricPrice = 2000; // Store as a number for calculations
+
+  // Cart data array
+  let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+  // Function to render cart items inside cartPanel
+  function renderCart() {
+    // Clear current items
+    cartItemsContainer.innerHTML = '';
+    let subtotal = 0; // Total for all items
     
-    // Elements references
-    const addToCartBtn = document.getElementById('addToCartBtn');
-    const cartPanel = document.getElementById('cartPanel');
-    const cartIcon = document.getElementById('cartIcon');
-    const cartItemsContainer = document.getElementById('cartItems');
-    const cartCount = document.getElementById('cartCount');
-    const emptyCartMsg = document.getElementById('emptyCartMsg');
-    const fabricPrice = 2000; // Store as a number for calculations
+    if (cartItems.length === 0) {
+      emptyCartMsg.style.display = 'block';
+    } else {
+      emptyCartMsg.style.display = 'none';
+      cartItems.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('flex', 'items-center', 'gap-3');
 
-    // Cart data array
-    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        // Image Thumbnail
+        const img = document.createElement('img');
+        img.src = item.image;
+        img.alt = item.name + ' image';
+        img.classList.add('w-12', 'h-12', 'object-cover', 'rounded');
 
-    // Function to render cart items inside cartPanel
-    function renderCart() {
-        // Clear current items
-        cartItemsContainer.innerHTML = '';
-        let subtotal = 0; // Total for all items
-        
-        if (cartItems.length === 0) {
-            emptyCartMsg.style.display = 'block';
-        } else {
-            emptyCartMsg.style.display = 'none';
-            cartItems.forEach((item, index) => {
-                const itemDiv = document.createElement('div');
-                itemDiv.classList.add('flex', 'items-center', 'gap-3');
+        // Name span
+        const name = document.createElement('span');
+        name.textContent = item.name;
+        name.classList.add('flex-grow', 'text-white', 'font-semibold');
 
-                // Image Thumbnail
-                const img = document.createElement('img');
-                img.src = item.image;
-                img.alt = item.name + ' image';
-                img.classList.add('w-12', 'h-12', 'object-cover', 'rounded');
+        // Quantity span
+        const quantity = document.createElement('span');
+        quantity.textContent ='Qty. '+ item.quantity;
+        quantity.classList.add('flex-grow', 'text-white', 'font-semibold');
 
-                // Name span
-                const name = document.createElement('span');
-                name.textContent = item.name;
-                name.classList.add('flex-grow', 'text-white', 'font-semibold');
+        // Subtotal calculation
+        const itemSubtotal = item.quantity * fabricPrice;
+        subtotal += itemSubtotal;
 
-                // Quantity span
-                const quantity = document.createElement('span');
-                quantity.textContent ='Qty. '+ item.quantity;
-                quantity.classList.add('flex-grow', 'text-white', 'font-semibold');
+        // Price span
+        const price = document.createElement('span');
+        price.textContent = 'Rs. ' + itemSubtotal;
+        price.classList.add('flex-grow', 'text-white', 'font-semibold');
 
-                // Subtotal calculation
-                const itemSubtotal = item.quantity * fabricPrice;
-                subtotal += itemSubtotal;
+        // Remove button
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = '×';
+        removeBtn.title = 'Remove from cart';
+        removeBtn.classList.add('text-red-500', 'text-xl', 'font-bold', 'hover:text-red-700');
+        removeBtn.onclick = () => { removeFromCart(index); };
 
-                // Price span
-                const price = document.createElement('span');
-                price.textContent = 'Rs. ' + itemSubtotal;
-                price.classList.add('flex-grow', 'text-white', 'font-semibold');
-
-                // Remove button
-                const removeBtn = document.createElement('button');
-                removeBtn.textContent = '×';
-                removeBtn.title = 'Remove from cart';
-                removeBtn.classList.add('text-red-500', 'text-xl', 'font-bold', 'hover:text-red-700');
-                removeBtn.onclick = () => { removeFromCart(index); };
-
-                itemDiv.appendChild(img);
-                itemDiv.appendChild(name);
-                itemDiv.appendChild(quantity);
-                itemDiv.appendChild(price);
-                itemDiv.appendChild(removeBtn);
-                cartItemsContainer.appendChild(itemDiv);
-            });
-        }
-
-        // Update cart count badge
-        cartCount.textContent = cartItems.length;
-
-        // Update subtotal in the cart
-        const subtotalElem = document.createElement('div');
-        subtotalElem.textContent = 'Subtotal: Rs. ' + subtotal;
-        subtotalElem.classList.add('text-yellow-400', 'font-bold');
-        cartItemsContainer.appendChild(subtotalElem);
+        itemDiv.appendChild(img);
+        itemDiv.appendChild(name);
+        itemDiv.appendChild(quantity);
+        itemDiv.appendChild(price);
+        itemDiv.appendChild(removeBtn);
+        cartItemsContainer.appendChild(itemDiv);
+      });
     }
 
-    // Function to remove item from cart by index
-    function removeFromCart(index) {
-        cartItems.splice(index, 1);
-        localStorage.setItem('cartItems', JSON.stringify(cartItems)); // Update local storage
-        renderCart();
+    // Update cart count badge
+    cartCount.textContent = cartItems.length;
+  }
+
+  // Function to remove item from cart by index
+  function removeFromCart(index) {
+    cartItems.splice(index, 1);
+    localStorage.setItem('cartItems', JSON.stringify(cartItems)); // Update local storage
+    renderCart();
+    renderSelectedItems(); // Update Address page items
+  }
+
+  // Function to render selected items on Address page
+  function renderSelectedItems() {
+    const cartItemsContainer = document.getElementById('cart-table-body');
+    const subtotalElem = document.getElementById('subtotal');
+    const taxElem = document.getElementById('tax');
+    const totalElem = document.getElementById('total');
+    let subtotal = 0;
+
+    cartItemsContainer.innerHTML = '';
+
+    if (cartItems.length === 0) {
+      cartItemsContainer.innerHTML = '<tr><td colspan="4" class="text-center">No items selected.</td></tr>';
+    } else {
+      cartItems.forEach((item) => {
+        const itemSubtotal = item.quantity * fabricPrice; // Assuming price is Rs. 2000 per 10 meters
+        subtotal += itemSubtotal;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td style="display: grid; place-items: center;">
+            <img src="${item.image}" class="rounded-lg"  style="width: 80px; height: 80px; margin-right: 10px;"></td>
+            <td style="text-align: center;"> <span>${item.name}</span>
+          </td>
+          <td style="text-align: center;">${item.quantity}</td>
+          <td style="text-align: center;">Rs. ${itemSubtotal.toFixed(2)}</td>
+        `;
+        cartItemsContainer.appendChild(row);
+      });
     }
 
-    // Function to render selected items on Address page
-    function renderSelectedItems() {
-        const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
-        const cartItemsContainer = document.getElementById('cart-table-body');
-        const subtotalElem = document.getElementById('subtotal');
-        const taxElem = document.getElementById('tax');
-        const totalElem = document.getElementById('total');
-        let subtotal = 0;
+    // Calculate tax and total
+    const tax = subtotal * 0.05;  // 5% tax
+    const total = subtotal + tax;
 
-        cartItemsContainer.innerHTML = '';
+    // Update displayed values
+    subtotalElem.innerText = `Rs. ${subtotal.toFixed(2)}`;
+    taxElem.innerText = `Rs. ${tax.toFixed(2)}`;
+    totalElem.innerText = `Rs. ${total.toFixed(2)}`;
+  }
 
-        if (selectedItems.length === 0) {
-            cartItemsContainer.innerHTML = '<tr><td colspan="4" class="text-center">No items selected.</td></tr>';
-        } else {
-            selectedItems.forEach((item) => {
-                const itemSubtotal = item.quantity * fabricPrice; // Assuming price is Rs. 2000 per 10 meters
-                subtotal += itemSubtotal;
+  // Function to remove item from selected items
+  function removeFromSelectedItems(itemName) {
+    let selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+    selectedItems = selectedItems.filter(item => item.name !== itemName);
+    localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+    renderSelectedItems();
+  }
 
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td style="display: grid; place-items: center;">
-                        <img src="${item.image}" class="rounded-lg"  style="width: 80px; height: 80px; margin-right: 10px;"></td>
-                       <td style="text-align: center;"> <span>${item.name}</span>
-                    </td>
-              <td style="text-align: center;">${item.quantity}</td>
-                    <td style="text-align: center;">Rs. ${itemSubtotal.toFixed(2)}</td>
-                `;
-                cartItemsContainer.appendChild(row);
+  // Toggle cart panel visibility on cart icon click
+  cartIcon.addEventListener('click', () => {
+    cartPanel.classList.toggle('hidden');
+  });
 
-            });
-        }
+  // Initial render
+  document.addEventListener('DOMContentLoaded', () => {
+    renderCart();
+    renderSelectedItems();
+  });
 
-        // Calculate tax and total
-        const tax = subtotal * 0.05;  // 10% tax
-        const total = subtotal + tax;
+  // Navigation functions
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
 
-        // Update displayed values
-        subtotalElem.innerText = `Rs. ${subtotal.toFixed(2)}`;
-        taxElem.innerText = `Rs. ${tax.toFixed(2)}`;
-        totalElem.innerText = `Rs. ${total.toFixed(2)}`;
-    }
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
 
-    // Function to remove item from selected items
-    function removeFromSelectedItems(itemName) {
-        let selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
-        selectedItems = selectedItems.filter(item => item.name !== itemName);
-        localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-        renderSelectedItems();
-    }
+  // Toggle payment options based on selection
+  function togglePaymentOptions() {
+    const paymentMethod = document.getElementById("paymentMethod").value;
+    document.getElementById("onlinePaymentOptions").style.display = 
+      paymentMethod === "online" ? "table-row" : "none";
+    document.getElementById("screenshotUpload").style.display = 
+      paymentMethod === "online" ? "table-row" : "none";
+  }
 
-    // Toggle cart panel visibility on cart icon click
-    cartIcon.addEventListener('click', () => {
-        cartPanel.classList.toggle('hidden');
-    });
+  // Email validation helper
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
 
-    // Initial render
-    document.addEventListener('DOMContentLoaded', () => {
-        renderCart();
-        renderSelectedItems();
-    });
-
-    // Add event listener to button
-    //addToCartBtn.addEventListener('click', addToCart);
-
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-</script>
-
-
-   <script>
-
-// [Keep all your existing cart functions...]
-
-async function sendOrderdetail() {
+  // Main order submission function
+  async function sendOrderdetail() {
     // Get all required field values
     const name = document.getElementById("cname").value.trim();
     const mobile = document.getElementById("mobile").value.trim();
@@ -460,7 +459,6 @@ async function sendOrderdetail() {
     const address = document.getElementById("Address").value.trim();
     const paymentMethod = document.getElementById("paymentMethod").value;
     const screenshot = document.getElementById("screenshot");
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     
     // Get calculated totals
     const subtotal = parseFloat(document.getElementById("subtotal").innerText.replace('Rs. ', ''));
@@ -469,148 +467,134 @@ async function sendOrderdetail() {
     
     // Validate each field
     if (!name) {
-        alert("Please enter your name");
-        document.getElementById("cname").focus();
-        return false;
+      alert("Please enter your name");
+      document.getElementById("cname").focus();
+      return false;
     }
     
     if (!mobile) {
-        alert("Please enter your mobile number");
-        document.getElementById("mobile").focus();
-        return false;
+      alert("Please enter your mobile number");
+      document.getElementById("mobile").focus();
+      return false;
     } else if (mobile.length !== 10 || isNaN(mobile)) {
-        alert("Please enter a valid 10-digit mobile number");
-        document.getElementById("mobile").focus();
-        return false;
+      alert("Please enter a valid 10-digit mobile number");
+      document.getElementById("mobile").focus();
+      return false;
     }
     
     if (!email) {
-        alert("Please enter your email address");
-        document.getElementById("email").focus();
-        return false;
+      alert("Please enter your email address");
+      document.getElementById("email").focus();
+      return false;
     } else if (!validateEmail(email)) {
-        alert("Please enter a valid email address");
-        document.getElementById("email").focus();
-        return false;
+      alert("Please enter a valid email address");
+      document.getElementById("email").focus();
+      return false;
     }
     
     if (!address) {
-        alert("Please enter your address");
-        document.getElementById("Address").focus();
-        return false;
+      alert("Please enter your address");
+      document.getElementById("Address").focus();
+      return false;
     }
     
     // Additional validation for online payment
     if (paymentMethod === "online") {
-        if (!screenshot.files || screenshot.files.length === 0) {
-            alert("Please upload payment screenshot for online payment");
-            return false;
-        }
+      if (!screenshot.files || screenshot.files.length === 0) {
+        alert("Please upload payment screenshot for online payment");
+        return false;
+      }
     }
     
     // Get the submit button and set loading state
     const sendButton = document.getElementById('send');
     const originalText = sendButton.textContent;
     sendButton.disabled = true;
-        // Replace the button text with a spinner during processing
-        sendButton.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Processing...';
+    sendButton.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Processing...';
     
     try {
-        // First check if server is reachable (with better error handling)
-        let serverAvailable = false;
-        try {
-            const healthCheck = await fetch('http://localhost:5000/api/health', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            
-            if (healthCheck.ok) {
-                const healthData = await healthCheck.json();
-                if (healthData.status === 'healthy') {
-                    serverAvailable = true;
-                }
-            }
-        } catch (healthError) {
-            console.warn("Backend health check failed:", healthError);
-            // Continue with local storage fallback
+      // First check if server is reachable
+      let serverAvailable = false;
+      try {
+        const healthCheck = await fetch('http://localhost:5000/api/health', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+          timeout: 3000 // 3 second timeout
+        });
+        
+        if (healthCheck.ok) {
+          const healthData = await healthCheck.json();
+          if (healthData.status === 'healthy') {
+            serverAvailable = true;
+          }
+        }
+      } catch (healthError) {
+        console.warn("Backend health check failed:", healthError);
+        serverAvailable = false;
+      }
+
+      // Prepare order data
+      const orderData = {
+        name,
+        mobile,
+        email,
+        address,
+        paymentMethod,
+        items: cartItems,
+        subtotal,
+        tax,
+        total,
+        date: new Date().toISOString(),
+        orderId: Date.now().toString() // Generate simple order ID
+      };
+
+      if (serverAvailable) {
+        // Create FormData for file upload
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(orderData));
+        
+        if (paymentMethod === "online" && screenshot.files[0]) {
+          formData.append('screenshot', screenshot.files[0]);
         }
 
-        // Prepare order data
-        const orderData = {
-            name,
-            mobile,
-            email,
-            address,
-            paymentMethod,
-            items: cartItems,
-            subtotal,
-            tax,
-            total,
-            date: new Date().toISOString(),
-            orderId: Date.now().toString() // Generate a simple order ID
-        };
+        // Send the order request with timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+        
+        const response = await fetch('http://localhost:5000/api/orders', {
+          method: 'POST',
+          body: formData,
+          signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
 
-        if (serverAvailable) {
-            // Create FormData for file upload
-            const formData = new FormData();
-            formData.append('data', JSON.stringify(orderData));
-            
-            if (paymentMethod === "online" && screenshot.files[0]) {
-                formData.append('screenshot', screenshot.files[0]);
-            }
-
-            // Send the order request with timeout
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000);
-            
-            const response = await fetch('http://localhost:5000/api/orders', {
-                method: 'POST',
-                body: formData,
-                signal: controller.signal
-            });
-            
-            clearTimeout(timeoutId);
-
-            if (!response.ok) {
-                throw new Error("Failed to place order with server");
-            }
-            
-            const result = await response.json();
-            orderData.orderId = result.orderId || orderData.orderId;
+        if (!response.ok) {
+          throw new Error("Failed to place order with server");
         }
+        
+        const result = await response.json();
+        orderData.orderId = result.orderId || orderData.orderId;
+      } else {
+        alert("Server is not running - order not saved to database");
+      }
 
-        // Store order details for confirmation page
-        localStorage.setItem('lastOrder', JSON.stringify(orderData));
-        localStorage.removeItem('cartItems');
-        
-        alert("Order placed successfully!" + (serverAvailable ? "" : " (Saved locally)"));
-        window.location.href = 'order-confirmation.html';
-        
+      // Store order details for confirmation page
+      localStorage.setItem('lastOrder', JSON.stringify(orderData));
+      localStorage.removeItem('cartItems');
+      
+      alert("Order placed successfully!" + (serverAvailable ? "" : " (Saved locally only)"));
+      window.location.href = 'order-confirmation.html';
+      
     } catch (error) {
-        console.error("Order submission error:", error);
-        alert(`Error: ${error.message}`);
+      console.error("Order submission error:", error);
+      alert(`Error: ${error.message || 'Failed to place order'}`);
     } finally {
-        // Reset button state
-        sendButton.disabled = false;
-        sendButton.textContent = originalText;
+      // Reset button state
+      sendButton.disabled = false;
+      sendButton.textContent = originalText;
     }
-}
-
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-function togglePaymentOptions() {
-    const paymentMethod = document.getElementById("paymentMethod").value;
-    document.getElementById("onlinePaymentOptions").style.display = 
-        paymentMethod === "online" ? "table-row" : "none";
-    document.getElementById("screenshotUpload").style.display = 
-        paymentMethod === "online" ? "table-row" : "none";
-}
-
+  }
 </script>
       
 </body> 

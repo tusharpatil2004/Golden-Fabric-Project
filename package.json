@@ -23,5 +23,12 @@
     "tailwindcss": "^4.1.11",
     "uuid": "^11.1.0"
   },
-  "devDependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tusharpatil2004/Golden-Fabric-Project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tusharpatil2004/Golden-Fabric-Project/issues"
+  },
+  "homepage": "https://github.com/tusharpatil2004/Golden-Fabric-Project#readme"
 }
