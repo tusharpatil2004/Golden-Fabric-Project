@@ -602,16 +602,27 @@
 <!--
 npm init -y
 npm install express cors multer uuid
-mkdir uploads
 node server.js
                      //After the server starts, you should see:
                      Server running on http://localhost:5000
                      API endpoint: http://localhost:5000/api/orders
 
-or
+===git push===
+git add .
+git commit -m "Describe what you changed"
+             Example: git commit -m "Added user login API"
+git push
 
-npm install express cors multer uuid
-node server.js
-curl http://localhost:5000/api/health
+                   ===shortcut===
+                      git add .
+                      git commit -m "Updated frontend with new UI"
+                      git push
+
+
+===Optional: Check Status Before Pushing
+You can check which files changed before committing:===
+
+git status
+
 -->
 
