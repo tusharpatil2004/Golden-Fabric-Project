@@ -23,9 +23,9 @@
     "total": 6300,
     "date": "2025-07-23T16:09:04.478Z",
     "orderId": "1753286944478",
-    "status": "Received",
+    "status": "Processing",
     "createdAt": "2025-07-23T16:09:04.532Z",
-    "updatedAt": "2025-07-23T16:09:04.532Z",
+    "updatedAt": "2025-08-03T08:15:32.322Z",
     "screenshot": null
   },
   {
@@ -47,9 +47,9 @@
     "total": 2100,
     "date": "2025-07-30T12:08:23.581Z",
     "orderId": "1753877303581",
-    "status": "Received",
+    "status": "Shipped",
     "createdAt": "2025-07-30T12:08:23.594Z",
-    "updatedAt": "2025-07-30T12:08:23.594Z",
+    "updatedAt": "2025-08-03T08:15:42.141Z",
     "screenshot": null
   },
   {
@@ -110,9 +110,9 @@
     "total": 14700,
     "date": "2025-07-31T17:59:23.357Z",
     "orderId": "1753984763357",
-    "status": "Received",
+    "status": "Delivered",
     "createdAt": "2025-07-31T17:59:23.380Z",
-    "updatedAt": "2025-07-31T17:59:23.380Z",
+    "updatedAt": "2025-08-03T08:15:49.458Z",
     "screenshot": null
   },
   {
@@ -134,9 +134,9 @@
     "total": 8400,
     "date": "2025-07-31T18:00:18.011Z",
     "orderId": "1753984818011",
-    "status": "Received",
+    "status": "Delivered",
     "createdAt": "2025-07-31T18:00:18.020Z",
-    "updatedAt": "2025-07-31T18:00:18.020Z",
+    "updatedAt": "2025-08-03T08:15:56.013Z",
     "screenshot": null
   },
   {
@@ -158,9 +158,9 @@
     "total": 8400,
     "date": "2025-07-31T18:14:59.025Z",
     "orderId": "1753985699025",
-    "status": "Received",
+    "status": "Cancelled",
     "createdAt": "2025-07-31T18:14:59.036Z",
-    "updatedAt": "2025-07-31T18:14:59.036Z",
+    "updatedAt": "2025-08-03T08:15:59.766Z",
     "screenshot": null
   },
   {
@@ -182,9 +182,9 @@
     "total": 2100,
     "date": "2025-07-31T18:22:49.786Z",
     "orderId": "1753986169786",
-    "status": "Received",
+    "status": "Processing",
     "createdAt": "2025-07-31T18:22:49.795Z",
-    "updatedAt": "2025-07-31T18:22:49.796Z",
+    "updatedAt": "2025-08-03T08:18:23.218Z",
     "screenshot": null
   },
   {
@@ -325,30 +325,6 @@
     "status": "Received",
     "createdAt": "2025-08-02T10:54:37.508Z",
     "updatedAt": "2025-08-02T10:54:37.508Z",
-    "screenshot": null
-  },
-  {
-    "id": "744e5448-dc69-4455-ad97-f82a6e8016de",
-    "name": "Sakshi Tandel",
-    "mobile": "2332323231",
-    "email": "sakshitandel039@gmail.com",
-    "address": "test",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 2000,
-    "tax": 100,
-    "total": 2100,
-    "date": "2025-08-02T10:58:41.255Z",
-    "orderId": "1754132321255",
-    "status": "Received",
-    "createdAt": "2025-08-02T10:58:41.258Z",
-    "updatedAt": "2025-08-02T10:58:41.258Z",
     "screenshot": null
   },
   {

@@ -408,6 +408,52 @@ app.get('/api/admin/users', async (req, res) => {
   }
 });
 
+// Delete order endpoint
+app.delete('/api/admin/orders/:id', async (req, res) => {
+  try {
+    let orders = await readJSONFile(ordersDBPath);
+    const initialLength = orders.length;
+    
+    orders = orders.filter(order => order.id !== req.params.id);
+    
+    if (orders.length === initialLength) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+    
+    await writeJSONFile(ordersDBPath, orders);
+    res.json({ success: true, message: 'Order deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting order:', error);
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  }
+});
+
+// Update order status endpoint
+app.put('/api/admin/orders/:id/status', async (req, res) => {
+  try {
+    const { status } = req.body;
+    if (!status || !['Received', 'Processing', 'Shipped', 'Delivered', 'Cancelled'].includes(status)) {
+      return res.status(400).json({ success: false, message: 'Invalid status' });
+    }
+    
+    let orders = await readJSONFile(ordersDBPath);
+    const orderIndex = orders.findIndex(order => order.id === req.params.id);
+    
+    if (orderIndex === -1) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+    
+    orders[orderIndex].status = status;
+    orders[orderIndex].updatedAt = new Date().toISOString();
+    
+    await writeJSONFile(ordersDBPath, orders);
+    res.json({ success: true, message: 'Order status updated' });
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  }
+});
+
 // Start server
 initializeDB().then(() => {
   app.listen(PORT, () => {
