@@ -46,6 +46,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname))); // Serve current directory
 app.use('/uploads', express.static(uploadDir));
 
+// Serve HTML files
+app.get('/orders.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'orders.html'));
+});
+
+app.get('/address.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'address.html'));
+});
+
 // Email transporter setup
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -98,6 +107,17 @@ async function readJSONFile(filePath) {
   } catch (error) {
     console.error(`Error reading ${filePath}:`, error);
     return [];
+  }
+}
+
+// Helper function to write JSON files
+async function writeJSONFile(filePath, data) {
+  try {
+    await fsp.writeFile(filePath, JSON.stringify(data, null, 2));
+    return true;
+  } catch (error) {
+    console.error(`Error writing to ${filePath}:`, error);
+    return false;
   }
 }
 
@@ -168,7 +188,7 @@ app.post('/api/register', async (req, res) => {
 
   // Save user
   users.push(newUser);
-  await fsp.writeFile(usersDBPath, JSON.stringify(users, null, 2));
+  await writeJSONFile(usersDBPath, users);
   
   // Clear OTP
   delete otpStorage[email];
@@ -316,17 +336,14 @@ app.post('/api/reset-password', async (req, res) => {
   users[userIndex].password = newPassword;
   
   // Save updated users
-  try {
-    await fsp.writeFile(usersDBPath, JSON.stringify(users, null, 2));
+  if (await writeJSONFile(usersDBPath, users)) {
     // Delete the used token
     delete resetTokens[token];
-    
     res.json({ 
       success: true, 
       message: 'Password reset successfully' 
     });
-  } catch (error) {
-    console.error('Error writing users DB:', error);
+  } else {
     res.status(500).json({ 
       success: false, 
       message: 'Failed to reset password' 
@@ -354,7 +371,7 @@ app.post('/api/orders', upload.single('screenshot'), async (req, res) => {
     };
     
     orders.push(newOrder);
-    await fsp.writeFile(ordersDBPath, JSON.stringify(orders, null, 2));
+    await writeJSONFile(ordersDBPath, orders);
     
     res.status(201).json({ 
       success: true,
@@ -367,12 +384,83 @@ app.post('/api/orders', upload.single('screenshot'), async (req, res) => {
   }
 });
 
+// Admin orders endpoint
+app.get('/api/admin/orders', async (req, res) => {
+  try {
+    const orders = await readJSONFile(ordersDBPath);
+    res.json(orders);
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Admin users endpoint
+app.get('/api/admin/users', async (req, res) => {
+  try {
+    const users = await readJSONFile(usersDBPath);
+    // Remove passwords before sending
+    const safeUsers = users.map(({ password, ...rest }) => rest);
+    res.json(safeUsers);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Delete order endpoint
+app.delete('/api/admin/orders/:id', async (req, res) => {
+  try {
+    let orders = await readJSONFile(ordersDBPath);
+    const initialLength = orders.length;
+    
+    orders = orders.filter(order => order.id !== req.params.id);
+    
+    if (orders.length === initialLength) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+    
+    await writeJSONFile(ordersDBPath, orders);
+    res.json({ success: true, message: 'Order deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting order:', error);
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  }
+});
+
+// Update order status endpoint
+app.put('/api/admin/orders/:id/status', async (req, res) => {
+  try {
+    const { status } = req.body;
+    if (!status || !['Received', 'Processing', 'Shipped', 'Delivered', 'Cancelled'].includes(status)) {
+      return res.status(400).json({ success: false, message: 'Invalid status' });
+    }
+    
+    let orders = await readJSONFile(ordersDBPath);
+    const orderIndex = orders.findIndex(order => order.id === req.params.id);
+    
+    if (orderIndex === -1) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+    
+    orders[orderIndex].status = status;
+    orders[orderIndex].updatedAt = new Date().toISOString();
+    
+    await writeJSONFile(ordersDBPath, orders);
+    res.json({ success: true, message: 'Order status updated' });
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  }
+});
+
 // Start server
 initializeDB().then(() => {
   app.listen(PORT, () => {
     console.log(`\n🚀 Server running on http://localhost:${PORT}`);
     console.log(`📋 API Endpoints:`);
     console.log(`   POST http://localhost:${PORT}/api/orders          - Submit order`);
+    console.log(`   GET  http://localhost:${PORT}/api/admin/orders    - Get all orders`);
     console.log(`   POST http://localhost:${PORT}/api/send-otp        - Send OTP`);
     console.log(`   POST http://localhost:${PORT}/api/register        - Register user`);
     console.log(`   POST http://localhost:${PORT}/api/login           - User login`);

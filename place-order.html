@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -405,6 +406,28 @@ font-family: 'poppins';
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
+
+    // Function to handle Place Order button click
+document.getElementById('placeOrderBtn').addEventListener('click', () => {
+    const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
+    if (selectedCheckboxes.length === 0) {
+        alert('Please select at least one item.');
+        return;
+    }
+
+    let selectedItems = [];
+    selectedCheckboxes.forEach(checkbox => {
+        const index = checkbox.getAttribute('data-index');
+        const item = cartItems[index];
+        selectedItems.push(item); // Add selected item to the array
+    });
+
+    // Store selected items in local storage
+    localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+
+    // Redirect to Address page
+    window.location.href = 'Address.html';
+});
 </script>
 </body>
 </html>
