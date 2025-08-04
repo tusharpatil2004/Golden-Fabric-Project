@@ -149,7 +149,7 @@
   <header class="flex items-center justify-between p-4 bg-gray-800 sticky top-0 z-20">
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="home.html" class="fas fa-home"> Home</a><br>
+      <a href="index.html" class="fas fa-home"> Home</a><br>
       <a href="aboutus.html" class="fas fa-user"> About Us</a><br>
       <a href="contactus.html" class="fas fa-phone"> Contact Us</a>
     </div>
@@ -370,18 +370,13 @@
   }
 
   // Function to render selected items on Address page
-<<<<<<< HEAD
 function renderSelectedItems() {
-=======
-  function renderSelectedItems() {
->>>>>>> 1a42b0edff9460a39b61555896bf068164c001d9
     const cartItemsContainer = document.getElementById('cart-table-body');
     const subtotalElem = document.getElementById('subtotal');
     const taxElem = document.getElementById('tax');
     const totalElem = document.getElementById('total');
     let subtotal = 0;
 
-<<<<<<< HEAD
     // Get selected items from local storage
     const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
     
@@ -405,28 +400,6 @@ function renderSelectedItems() {
             `;
             cartItemsContainer.appendChild(row);
         });
-=======
-    cartItemsContainer.innerHTML = '';
-
-    if (cartItems.length === 0) {
-      cartItemsContainer.innerHTML = '<tr><td colspan="4" class="text-center">No items selected.</td></tr>';
-    } else {
-      cartItems.forEach((item) => {
-        const itemSubtotal = item.quantity * fabricPrice; // Assuming price is Rs. 2000 per 10 meters
-        subtotal += itemSubtotal;
-
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td style="display: grid; place-items: center;">
-            <img src="${item.image}" class="rounded-lg"  style="width: 80px; height: 80px; margin-right: 10px;"></td>
-            <td style="text-align: center;"> <span>${item.name}</span>
-          </td>
-          <td style="text-align: center;">${item.quantity}</td>
-          <td style="text-align: center;">Rs. ${itemSubtotal.toFixed(2)}</td>
-        `;
-        cartItemsContainer.appendChild(row);
-      });
->>>>>>> 1a42b0edff9460a39b61555896bf068164c001d9
     }
 
     // Calculate tax and total
@@ -437,11 +410,7 @@ function renderSelectedItems() {
     subtotalElem.innerText = `Rs. ${subtotal.toFixed(2)}`;
     taxElem.innerText = `Rs. ${tax.toFixed(2)}`;
     totalElem.innerText = `Rs. ${total.toFixed(2)}`;
-<<<<<<< HEAD
 }
-=======
-  }
->>>>>>> 1a42b0edff9460a39b61555896bf068164c001d9
 
   // Function to remove item from selected items
   function removeFromSelectedItems(itemName) {
@@ -495,12 +464,9 @@ function renderSelectedItems() {
     const address = document.getElementById("Address").value.trim();
     const paymentMethod = document.getElementById("paymentMethod").value;
     const screenshot = document.getElementById("screenshot");
-<<<<<<< HEAD
     
    // Get selected items from local storage
     const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
-=======
->>>>>>> 1a42b0edff9460a39b61555896bf068164c001d9
     
     // Get calculated totals
     const subtotal = parseFloat(document.getElementById("subtotal").innerText.replace('Rs. ', ''));
@@ -575,31 +541,19 @@ function renderSelectedItems() {
         serverAvailable = false;
       }
 
-<<<<<<< HEAD
        // Prepare order data with selected items only
-=======
-      // Prepare order data
->>>>>>> 1a42b0edff9460a39b61555896bf068164c001d9
       const orderData = {
         name,
         mobile,
         email,
         address,
         paymentMethod,
-<<<<<<< HEAD
         items: selectedItems, // Use selectedItems instead of cartItems
-=======
-        items: cartItems,
->>>>>>> 1a42b0edff9460a39b61555896bf068164c001d9
         subtotal,
         tax,
         total,
         date: new Date().toISOString(),
-<<<<<<< HEAD
         orderId: Date.now().toString()
-=======
-        orderId: Date.now().toString() // Generate simple order ID
->>>>>>> 1a42b0edff9460a39b61555896bf068164c001d9
       };
 
       if (serverAvailable) {
@@ -668,15 +622,9 @@ git commit -m "Describe what you changed"
 git push
 
                    ===shortcut===
-<<<<<<< HEAD
 git add .
-git commit -m "Updated frontend with new UI"
+git commit -m "Change in home,Address,Orders page & server file"
 git push
-=======
-                      git add .
-                      git commit -m "Updated frontend with new UI"
-                      git push
->>>>>>> 1a42b0edff9460a39b61555896bf068164c001d9
 
 
 ===Optional: Check Status Before Pushing

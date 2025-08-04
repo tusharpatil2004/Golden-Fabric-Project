@@ -649,5 +649,49 @@
     "createdAt": "2025-08-03T16:37:32.585Z",
     "updatedAt": "2025-08-03T16:37:32.585Z",
     "screenshot": null
+  },
+  {
+    "id": "61a5c523-a3a4-401c-93cd-1d0380de40fb",
+    "name": "Tushar Naresh Patil",
+    "mobile": "7499919894",
+    "email": "metusharpatil8@gmail.com",
+    "address": "At-Post :- jambrung, khalapur, Raigad 410201",
+    "paymentMethod": "cod",
+    "items": [
+      {
+        "name": "Canvas",
+        "image": "images/Canvas.jpg",
+        "quantity": 1
+      },
+      {
+        "name": "Cotton",
+        "image": "images/cotton.jpg",
+        "quantity": 1
+      },
+      {
+        "name": "Jersey",
+        "image": "images/jersy.jpg",
+        "quantity": 3
+      },
+      {
+        "name": "Viscose",
+        "image": "images/viscose.jpg",
+        "quantity": 1
+      },
+      {
+        "name": "Velvet",
+        "image": "images/velvet.jpg",
+        "quantity": 1
+      }
+    ],
+    "subtotal": 14000,
+    "tax": 700,
+    "total": 14700,
+    "date": "2025-08-04T08:42:21.056Z",
+    "orderId": "1754296941056",
+    "status": "Received",
+    "createdAt": "2025-08-04T08:42:21.074Z",
+    "updatedAt": "2025-08-04T08:42:21.074Z",
+    "screenshot": null
   }
 ]
