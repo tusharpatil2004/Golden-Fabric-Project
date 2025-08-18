@@ -1,154 +1,1595 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fabric Shop - Cotton</title>
+<title>Golden Fabrics - Cotton Collection</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* Custom scrollbar for cart panel */
-  #cartPanel::-webkit-scrollbar {
-    width: 6px;
+  :root {
+    --primary: #D4AF37;
+    --secondary: #1a1a1a;
+    --dark: #121212;
+    --light: #f8f8f8;
+    --gray: #2d2d2d;
   }
-  #cartPanel::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 3px;
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
   }
-  #cartPanel::-webkit-scrollbar-thumb:hover {
-    background: #555;
+  
+  body {
+    background-color: var(--dark);
+    color: var(--light);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
   }
+  
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #2a2a2a 0%, #121212 70%);
+    z-index: -1;
+  }
+  
+  /* Header Styles */
+  .main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 5%;
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  }
+  
+  .menu-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--primary);
+    background: rgba(212, 175, 55, 0.1);
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s;
+  }
+  
+  .menu-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+  }
+  
+  .brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .cart-icon {
+    position: relative;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.1);
+    transition: all 0.3s;
+  }
+  
+  .cart-icon:hover {
+    background: rgba(212, 175, 55, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--primary);
+    color: var(--dark);
+    font-size: 12px;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Navigation */
   .sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-  padding-top: -25px;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-  font-family: 'poppins';
-}
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(10px);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 80px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+  
+  .sidenav a {
+    padding: 12px 20px 12px 40px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #ccc;
+    display: block;
+    transition: 0.3s;
+    position: relative;
+    margin: 8px 0;
+  }
+  
+  .sidenav a:hover {
+    color: var(--primary);
+    background: rgba(212, 175, 55, 0.05);
+  }
+  
+  .sidenav a:hover::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--primary);
+  }
+  
+  .sidenav a i {
+    margin-right: 12px;
+    width: 24px;
+    text-align: center;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 36px;
+    color: var(--primary);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Hero Section */
+  .cotton-hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1520013573795-38516d2661e4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=1200');
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto;
+    max-width: 1200px;
+    border-radius: 12px;
+    margin-top: 20px;
+    position: relative;
+  }
+  
+  .cotton-hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  }
+  
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #f0f0f0;
+  }
+  
+  /* Cotton Fabric Detail Section */
+  .product-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    background: rgba(26, 26, 26, 0.5);
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+  
+  .product-gallery {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+  }
+  
+  .product-main-image {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.4s ease;
+  }
+  
+  .thumbnail-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+  
+  .thumbnail:hover, .thumbnail.active {
+    opacity: 1;
+    border: 1px solid var(--primary);
+    transform: scale(1.05);
+  }
+  
+  .features-section {
+    background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+  
+  .features-title {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .features-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--primary);
+  }
+  
+  .features-list {
+    list-style-type: none;
+  }
+  
+  .features-list li {
+    padding: 12px 0;
+    padding-left: 35px;
+    position: relative;
+    color: #ccc;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  
+  .features-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .features-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1.2rem;
+    width: 25px;
+    height: 25px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .product-info {
+    flex: 1;
+    min-width: 300px;
+    background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+  
+  .product-title {
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+    position: relative;
+    padding-bottom: 15px;
+  }
+  
+  .product-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: var(--primary);
+  }
+  
+  .product-price {
+    font-size: 1.8rem;
+    color: var(--light);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .product-price span {
+    color: var(--primary);
+  }
+  
+  .min-order {
+    display: inline-block;
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  
+  .product-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .rating-stars {
+    display: flex;
+    color: #FFD700;
+    font-size: 1.1rem;
+    margin-right: 10px;
+  }
+  
+  .rating-text {
+    color: #aaa;
+    font-size: 0.95rem;
+  }
+  
+  .product-description {
+    color: #ccc;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+  }
+  
+  .customization-section {
+    background: rgba(40, 40, 40, 0.5);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+  
+  .customization-title {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+  }
+  
+  .custom-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .custom-option input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary);
+  }
+  
+  .custom-option label {
+    color: #ccc;
+    cursor: pointer;
+  }
+  
+  .product-options {
+    background: rgba(40, 40, 40, 0.5);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+  
+  .option-group {
+    margin-bottom: 20px;
+  }
+  
+  .option-label {
+    display: block;
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  .color-options {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  
+  .color-option {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  
+  .color-option:hover {
+    transform: scale(1.1);
+  }
+  
+  .color-option.selected {
+    transform: scale(1.1);
+    border: 2px solid var(--light);
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  
+  .color-option.selected::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 0.8rem;
+    text-shadow: 0 0 3px rgba(0,0,0,0.8);
+  }
+  
+  .option-select {
+    background: rgba(40, 40, 40, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--light);
+    padding: 12px 15px;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .quantity-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+  }
+  
+  .quantity-label {
+    font-size: 1.1rem;
+    color: #ccc;
+    min-width: 100px;
+  }
+  
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .quantity-btn {
+    width: 42px;
+    height: 42px;
+    background: rgba(212, 175, 55, 0.1);
+    border: none;
+    color: var(--primary);
+    font-size: 1.3rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .quantity-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+  }
+  
+  .quantity-input {
+    background: rgba(40, 40, 40, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--light);
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 100px;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  
+  .add-to-cart-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px;
+    background: var(--primary);
+    color: var(--dark);
+    text-align: center;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .add-to-cart-btn:hover {
+    background: #e6c04d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+  }
+  
+  .add-to-cart-btn:active {
+    transform: translateY(0);
+  }
+  
+  .quantity-note {
+    color: #aaa;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 0 20px;
+    line-height: 1.5;
+  }
+  
+  /* Products Section */
+  .products-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 40px;
+    position: relative;
+  }
+  
+  .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+  
+  .product-card {
+    background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: all 0.4s ease;
+    position: relative;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+  
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    border-color: rgba(212, 175, 55, 0.3);
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .product-card:hover .product-image {
+    transform: scale(1.05);
+  }
+  
+  .product-info-card {
+    padding: 20px;
+  }
+  
+  .product-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--light);
+    margin-bottom: 10px;
+  }
+  
+  .product-price-card {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  
+  .product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    color: #aaa;
+    font-size: 0.9rem;
+  }
+  
+  .fabric-type {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--primary);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .product-options-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  .option-label-card {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 5px;
+  }
+  
+  .option-select-card {
+    background: rgba(40, 40, 40, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--light);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .option-input-card {
+    background: rgba(40, 40, 40, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--light);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  /* Cart Panel */
+  #cartPanel {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 350px;
+    max-height: 75vh;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    padding: 20px;
+    z-index: 200;
+    overflow: auto;
+    transform: translateX(120%);
+    transition: transform 0.4s ease;
+  }
+  
+  #cartPanel.active {
+    transform: translateX(0);
+  }
+  
+  .cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 15px;
+  }
+  
+  .cart-title {
+    font-size: 1.4rem;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  
+  .close-cart {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .close-cart:hover {
+    color: var(--primary);
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  
+  .cart-item-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
+  }
+  
+  .cart-item-details {
+    flex: 1;
+  }
+  
+  .cart-item-name {
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  .cart-item-price {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  
+  .cart-item-meta {
+    color: #aaa;
+    font-size: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+  }
+  
+  .remove-item {
+    background: rgba(255, 80, 80, 0.1);
+    color: #ff5050;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .remove-item:hover {
+    background: rgba(255, 80, 80, 0.3);
+  }
+  
+  .cart-footer {
+    padding-top: 20px;
+  }
+  
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .total-label {
+    color: #ccc;
+  }
+  
+  .total-amount {
+    color: var(--primary);
+  }
+  
+  .checkout-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: var(--dark);
+    text-align: center;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .checkout-btn:hover {
+    background: #e6c04d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+  }
+  
+  /* Responsive */
+  @media (max-width: 992px) {
+    .hero-title {
+      font-size: 2.8rem;
+    }
+    
+    .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .product-main-image {
+      height: 350px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.4rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    
+    #cartPanel {
+      width: 90%;
+      left: 5%;
+      right: 5%;
+      top: 80px;
+    }
+    
+    .product-container {
+      flex-direction: column;
+    }
+    
+    .product-gallery, .product-info {
+      min-width: 100%;
+    }
+    
+    .product-main-image {
+      height: 300px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .brand {
+      font-size: 1.4rem;
+    }
+    
+    .hero-title {
+      font-size: 2rem;
+    }
+    
+    .section-title {
+      font-size: 1.8rem;
+    }
+    
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .product-title {
+      font-size: 1.8rem;
+    }
+    
+    .product-price {
+      font-size: 1.5rem;
+    }
+    
+    .quantity-controls {
+      flex-wrap: wrap;
+    }
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.6s ease forwards;
+  }
+  
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+  
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e6c04d;
+  }
 </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+<body>
 
-  <!-- Header -->
-  <header class="flex items-center justify-between p-4 bg-gray-800 sticky top-0 z-20">
-    <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="index.html" class="fas fa-home"> Home</a><br>
-      <a href="aboutus.html" class="fas fa-user"> About Us</a><br>
-      <a href="contactus.html" class="fas fa-phone"> Contact Us</a>
-    </div>
-    <span aria-label="Menu" class="text-white text-3xl" style="font-size:30px;cursor:pointer;margin-left:15px;" onclick="openNav()">&#9776;</span>
-    <div class="font-bold text-xl tracking-wide">GOLDEN FABRICS</div>
+<!-- Header -->
+<header class="main-header">
+  <div class="menu-btn" onclick="openNav()">
+    <i class="fas fa-bars"></i>
+  </div>
+  
+  <div class="brand">GOLDEN FABRICS</div>
+  
+  <div class="cart-icon" id="cartIcon" title="View Cart">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-count" id="cartCount">0</span>
+  </div>
+</header>
+
+<!-- Side Navigation -->
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="index.html"><i class="fas fa-home"></i> Home</a>
+  <a href="aboutus.html"><i class="fas fa-user"></i> About Us</a>
+  <a href="contactus.html"><i class="fas fa-phone"></i> Contact Us</a>
+  <a href="orders.html"><i class="fas fa-clipboard-list"></i> All Orders</a>
+  <a href="ManageOrder.html"><i class="fas fa-tasks"></i> Manage Orders</a>
+  <a href="#"><i class="fas fa-box"></i> My Order</a>
+  <a href="users.html"><i class="fas fa-users"></i> All User Account</a>
+</div>
+
+<!-- Hero Section -->
+<div class="cotton-hero">
+  <h1 class="hero-title">Premium Cotton Collection</h1>
+  <p class="hero-subtitle">Discover our range of high-quality cotton fabrics perfect for T-shirts, shirts, jeans, and more</p>
+</div>
+
+<!-- Fixed Cotton Fabric Detail Section -->
+<div class="product-container">
+  <!-- Left Column: Image and Features -->
+  <div class="product-gallery">
+    <img src="https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cotton Fabric" class="product-main-image" id="mainImage">
     
-    <!-- Cart Icon with count -->
-    <div class="relative cursor-pointer" id="cartIcon" title="View Cart">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" 
-              stroke-linejoin="round" 
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6m5-6v6m4-6v6m5-12h-6" />
-      </svg>
-      <span id="cartCount" class="absolute -top-1 -right-1 bg-red-600 rounded-full text-xs w-5 h-5 flex items-center justify-center font-semibold">0</span>
+    <div class="thumbnail-container">
+      <img src="https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Cotton Thumbnail 1" class="thumbnail active" onclick="changeImage(this, 'https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')">
+      <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Cotton Thumbnail 2" class="thumbnail" onclick="changeImage(this, 'https://images.unsplash.com/photo-1556906781-9a412961c28c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')">
+      <img src="https://images.unsplash.com/photo-1600956054489-a23507a64e4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Cotton Thumbnail 3" class="thumbnail" onclick="changeImage(this, 'https://images.unsplash.com/photo-1600956054489-a23507a64e4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')">
+      <img src="https://images.unsplash.com/photo-1556905055-8f358a7a4b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Cotton Thumbnail 4" class="thumbnail" onclick="changeImage(this, 'https://images.unsplash.com/photo-1556905055-8f358a7a4b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80')">
     </div>
-  </header>
-
-  <!-- Main content container -->
-  <main class="flex-grow container mx-auto p-4 flex flex-col md:flex-row gap-8 justify-center" >
-
-    <!-- Fabric info panel -->
-    <aside class="md:w-1/4 bg-gray-800 rounded-lg p-4 flex flex-col items-center" style="font-size: 20px;">
-      <img id="fabricThumbnail" 
-           src="images/cotton.jpg" 
-           alt="Cotton fabric thumbnail" 
-           class="rounded-lg mb-4 object-cover w-48 h-48" />
-      <h2 class="text-white text-lg font-semibold mb-2" style="font-size: 20px;">Cotton</h2>
-      <div class="bg-gray-600 text-sm text-gray-300 px-2 py-1 rounded mb-2" style="font-size: 20px;">From Rs. 2,000 (10 Meter)</div>
-      <p class="text-gray-300  text-center" style="font-size: 18px;">
-        (Speciality: beauty, comfort, durability & versatility)
-      </p>
-      <br>
-      <p class="text-gray-300 text-xs mb-2 text-center" style="font-size: 20px; margin-bottom: 15px;">
-        Characteristics of cotton fabric
-      </p>
-      
-      <ul class="text-gray-300 text-xs list-disc list-inside mb-4" style="font-size: 20px;">
-        <li>Durability</li>
-        <br>
-        <li>Absorbency</li>
-        <br>
-        <li>Holds dye well</li>
-        <br>
-        <li>Breathability</li>
-        <br>
-        <li>No static cling</li>
-        <br>
+    
+    <!-- Characteristics Section -->
+    <div class="features-section">
+      <h3 class="features-title">Characteristics of Cotton Fabric</h3>
+      <ul class="features-list">
+        <li>Exceptional durability and longevity</li>
+        <li>Superior absorbency for comfort</li>
+        <li>Excellent dye retention properties</li>
+        <li>Highly breathable for all climates</li>
+        <li>No static cling for easy wear</li>
+        <li>Hypoallergenic and skin-friendly</li>
+        <li>Machine washable and easy to care for</li>
+        <li>Sustainable and biodegradable</li>
       </ul>
-      <!-- Quantity Input -->
+    </div>
+  </div>
+  
+  <!-- Right Column: Product Info and Options -->
+  <div class="product-info">
+    <h1 class="product-title">Premium Cotton Fabric</h1>
+    
+    <div class="product-price">From <span>Rs. 2,000</span> per 10 meters</div>
+    
+    <div class="product-rating">
+      <div class="rating-stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+      </div>
+      <span class="rating-text">(4.7 based on 128 reviews)</span>
+    </div>
+    
+    <p class="product-description">
+      Cotton is made from the natural fibers of cotton plants. Cotton is primarily composed of cellulose, 
+      an insoluble organic compound crucial to plant structure, and is a soft and fluffy material. 
+      The term cotton refers to the part of the cotton plant that grows in the boll, the encasing for 
+      the fluffy cotton fiber. Our premium cotton is sustainably sourced and OEKO-TEX certified.
+    </p>
+    
+   <!--<div class="customization-section">
+      <h3 class="customization-title">Customization Options</h3>
+      <div class="custom-option">
+        <input type="checkbox" id="embroidery" name="embroidery">
+        <label for="embroidery">Add custom embroidery (+Rs. 500)</label>
+      </div>
+      <div class="custom-option">
+        <input type="checkbox" id="dye" name="dye">
+        <label for="dye">Custom dye color (+Rs. 300)</label>
+      </div>
+      <div class="custom-option">
+        <input type="checkbox" id="print" name="print">
+        <label for="print">Add custom print (+Rs. 700)</label>
+      </div>
+    </div>-->
+    <div class="product-options">
+      <div class="option-group">
+        <label class="option-label">Select Color:</label>
+        <div class="color-options">
+          <div class="color-option selected" style="background-color: #ffffff;" data-color="White" title="White"></div>
+          <div class="color-option" style="background-color: #f0f0f0;" data-color="Natural" title="Natural"></div>
+          <div class="color-option" style="background-color: #f5d5c1;" data-color="Beige" title="Beige"></div>
+          <div class="color-option" style="background-color: #c7c7c7;" data-color="Gray" title="Gray"></div>
+          <div class="color-option" style="background-color: #a9d9f7;" data-color="Sky Blue" title="Sky Blue"></div>
+        </div>
+      </div>
       
-      <h2 >Qty. <input type="number" id="quantityInput" min="1" value="1" class="bg-gray-700 text-white p-2 rounded w-14 text-center mb-2" />
-      </h2>
-      <button id="addToCartBtn" class="bg-gray-700 hover:bg-gray-600 py-2 px-4 rounded font-semibold transition-colors">
-        Add to cart
-      </button>
-      <small style="color: red; margin-top: 10px; background-color: rgba(81, 96, 97, 0.76); padding-left: 5px; padding-right: 5px;">
-        (Quantity 1 Means 10 Meter Fabric) </small>
-    </aside>
+      <div class="option-group">
+        <label class="option-label">Fabric Weight:</label>
+        <select class="option-select" id="weightSelect">
+          <option value="Lightweight (140gsm)">Lightweight (140gsm)</option>
+          <option value="Medium Weight (180gsm)" selected>Medium Weight (180gsm)</option>
+          <option value="Heavyweight (220gsm)">Heavyweight (220gsm)</option>
+        </select>
+      </div>
+      
+      <div class="option-group">
+        <label class="option-label">Weave Type:</label>
+        <select class="option-select" id="weaveSelect">
+          <option value="Plain Weave">Plain Weave</option>
+          <option value="Twill Weave" selected>Twill Weave</option>
+          <option value="Satin Weave">Satin Weave</option>
+          <option value="Jersey Knit">Jersey Knit</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="quantity-section">
+      <span class="quantity-label">Quantity:</span>
+      <div class="quantity-controls">
+        <button class="quantity-btn" id="decreaseQty">-</button>
+        <input type="number" id="quantityInput" min="1" value="1" class="quantity-input">
+        <button class="quantity-btn" id="increaseQty">+</button>
+        <span class="text-gray-400">(10 meters per unit)</span>
+      </div>
+    </div>
+    
+    <button id="addToCartBtn" class="add-to-cart-btn">
+      <i class="fas fa-shopping-cart"></i> Add to Cart - Rs. <span id="totalPrice">2,000</span>
+    </button>
+    
+    <p class="quantity-note">Note: Minimum order quantity is 10 meters. Custom orders require 3-5 business days for processing.</p>
+  </div>
+</div>
 
-    <!-- Fabric detailed view -->
-    <section class="md:w-2/3">
-      <h1 class="text-3xl font-bold text-yellow-400 mb-4 text-center md:text-left">Cotton Fabric</h1>
-      <img src="images/cottonmanufacturing.jpeg"
-           alt="Cotton fabric detailed" 
-           class="w-full rounded-lg mb-6 border border-gray-700" />
-      <p class="text-gray-100 text-sm leading-relaxed" style="font-size: 20px;">
-        Cotton is made from the natural fibers of cotton plants. Cotton is primarily composed of cellulose, an insoluble organic compound crucial to plant 
-        structure, and is a soft and fluffy material. The term cotton refers to the part of the cotton plant that grows in the boll, the encasing for the fluffy 
-        cotton fiber. Cotton is spun into yarn that is then woven to create a soft, durable fabric used for everyday garments like t-shirts, jeans, dresses, bed 
-        linens, and much more.
-      </p>
-    </section>
+<!-- Products Section -->
+<div class="products-container">
+  <h2 class="section-title">Cotton Products</h2>
+  
+  <div class="products-grid">
+    <!-- Cotton T-Shirt -->
+    <div class="product-card fade-in">
+      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton T-Shirt" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Premium Cotton T-Shirt</h3>
+        <p class="product-price-card">Rs. 1,200</p>
+        <p>Soft, breathable cotton perfect for everyday wear</p>
+        <div class="product-meta">
+          <span class="fabric-type">100% Cotton</span>
+          <span>Sizes: S-XXL</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Size:</label>
+            <select class="option-select-card product-size">
+              <option value="S">Small (S)</option>
+              <option value="M" selected>Medium (M)</option>
+              <option value="L">Large (L)</option>
+              <option value="XL">Extra Large (XL)</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton T-Shirt" data-price="1200" data-image="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Cotton Shirt -->
+    <div class="product-card fade-in delay-1">
+      <img src="https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton Shirt" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Formal Cotton Shirt</h3>
+        <p class="product-price-card">Rs. 1,800</p>
+        <p>Classic formal shirt made from premium cotton</p>
+        <div class="product-meta">
+          <span class="fabric-type">100% Cotton</span>
+          <span>Sizes: S-XXL</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Size:</label>
+            <select class="option-select-card product-size">
+              <option value="S">Small (S)</option>
+              <option value="M" selected>Medium (M)</option>
+              <option value="L">Large (L)</option>
+              <option value="XL">Extra Large (XL)</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton Shirt" data-price="1800" data-image="https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Cotton Jeans -->
+    <div class="product-card fade-in delay-2">
+      <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton Jeans" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Cotton Denim Jeans</h3>
+        <p class="product-price-card">Rs. 2,500</p>
+        <p>Durable cotton denim for long-lasting wear</p>
+        <div class="product-meta">
+          <span class="fabric-type">98% Cotton, 2% Elastane</span>
+          <span>Sizes: 28-40</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Size:</label>
+            <select class="option-select-card product-size">
+              <option value="28">28</option>
+              <option value="30">30</option>
+              <option value="32" selected>32</option>
+              <option value="34">34</option>
+              <option value="36">36</option>
+              <option value="38">38</option>
+              <option value="40">40</option>
+            </select>
+          </div>
+          
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton Jeans" data-price="2500" data-image="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Cotton Dress -->
+    <div class="product-card fade-in delay-3">
+      <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton Dress" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Summer Cotton Dress</h3>
+        <p class="product-price-card">Rs. 2,200</p>
+        <p>Lightweight and comfortable for warm days</p>
+        <div class="product-meta">
+          <span class="fabric-type">100% Cotton</span>
+          <span>Sizes: S-XL</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Size:</label>
+            <select class="option-select-card product-size">
+              <option value="S">Small (S)</option>
+              <option value="M" selected>Medium (M)</option>
+              <option value="L">Large (L)</option>
+              <option value="XL">Extra Large (XL)</option>
+            </select>
+          </div>
+          
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton Dress" data-price="2200" data-image="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Cotton Hoodie -->
+    <div class="product-card fade-in delay-4">
+      <img src="https://images.unsplash.com/photo-1609172795052-05bfe8a3d0ff?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton Hoodie" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Cotton Hoodie</h3>
+        <p class="product-price-card">Rs. 2,100</p>
+        <p>Comfortable and warm for cooler days</p>
+        <div class="product-meta">
+          <span class="fabric-type">80% Cotton, 20% Polyester</span>
+          <span>Sizes: S-XXL</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Size:</label>
+            <select class="option-select-card product-size">
+              <option value="S">Small (S)</option>
+              <option value="M" selected>Medium (M)</option>
+              <option value="L">Large (L)</option>
+              <option value="XL">Extra Large (XL)</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton Hoodie" data-price="2100" data-image="https://images.unsplash.com/photo-1609172795052-05bfe8a3d0ff?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Cotton Pajamas -->
+    <div class="product-card fade-in delay-5">
+      <img src="https://images.unsplash.com/photo-1593030103066-0093718efeb9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton Pajamas" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Cotton Pajama Set</h3>
+        <p class="product-price-card">Rs. 1,700</p>
+        <p>Soft and comfortable for a good night's sleep</p>
+        <div class="product-meta">
+          <span class="fabric-type">100% Cotton</span>
+          <span>Sizes: S-XL</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Size:</label>
+            <select class="option-select-card product-size">
+              <option value="S">Small (S)</option>
+              <option value="M" selected>Medium (M)</option>
+              <option value="L">Large (L)</option>
+              <option value="XL">Extra Large (XL)</option>
+            </select>
+          </div>
+          
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton Pajamas" data-price="1700" data-image="https://images.unsplash.com/photo-1593030103066-0093718efeb9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Cotton Towels -->
+    <div class="product-card fade-in">
+      <img src="https://images.unsplash.com/photo-1601823984263-b87b59798b70?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton Towels" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Premium Cotton Towels</h3>
+        <p class="product-price-card">Rs. 850</p>
+        <p>Highly absorbent and soft cotton towels</p>
+        <div class="product-meta">
+          <span class="fabric-type">100% Cotton</span>
+          <span>Set of 2</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton Towels" data-price="850" data-image="https://images.unsplash.com/photo-1601823984263-b87b59798b70?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Cotton Bed Sheets -->
+    <div class="product-card fade-in delay-1">
+      <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton Bed Sheets" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Cotton Bed Sheet Set</h3>
+        <p class="product-price-card">Rs. 3,200</p>
+        <p>300 thread count cotton for ultimate comfort</p>
+        <div class="product-meta">
+          <span class="fabric-type">100% Cotton</span>
+          <span>King Size</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton Bed Sheets" data-price="3200" data-image="https://images.unsplash.com/photo-1505691938895-1758d7feb511?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Cotton Socks -->
+    <div class="product-card fade-in delay-2">
+      <img src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton Socks" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Cotton Crew Socks (6-Pack)</h3>
+        <p class="product-price-card">Rs. 950</p>
+        <p>Soft cotton socks for everyday comfort</p>
+        <div class="product-meta">
+          <span class="fabric-type">85% Cotton, 15% Spandex</span>
+          <span>One Size Fits All</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton Socks" data-price="950" data-image="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Cotton Jacket -->
+    <div class="product-card fade-in delay-3">
+      <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton Jacket" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Cotton Bomber Jacket</h3>
+        <p class="product-price-card">Rs. 3,500</p>
+        <p>Stylish and comfortable cotton jacket</p>
+        <div class="product-meta">
+          <span class="fabric-type">100% Cotton</span>
+          <span>Sizes: S-XL</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Size:</label>
+            <select class="option-select-card product-size">
+              <option value="S">Small (S)</option>
+              <option value="M" selected>Medium (M)</option>
+              <option value="L">Large (L)</option>
+              <option value="XL">Extra Large (XL)</option>
+            </select>
+          </div>
+          
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton Jacket" data-price="3500" data-image="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Cotton Scarf -->
+    <div class="product-card fade-in delay-4">
+      <img src="https://images.unsplash.com/photo-1585232350741-453e73c8d5e0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton Scarf" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Cotton Scarf</h3>
+        <p class="product-price-card">Rs. 650</p>
+        <p>Lightweight cotton scarf for all seasons</p>
+        <div class="product-meta">
+          <span class="fabric-type">100% Cotton</span>
+          <span>One Size</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton Scarf" data-price="650" data-image="https://images.unsplash.com/photo-1585232350741-453e73c8d5e0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+    
+    <!-- Cotton Polo Shirt -->
+    <div class="product-card fade-in delay-5">
+      <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500" alt="Cotton Polo" class="product-image">
+      <div class="product-info-card">
+        <h3 class="product-name">Cotton Polo Shirt</h3>
+        <p class="product-price-card">Rs. 1,500</p>
+        <p>Classic polo shirt made from premium cotton</p>
+        <div class="product-meta">
+          <span class="fabric-type">100% Cotton</span>
+          <span>Sizes: S-XXL</span>
+        </div>
+        
+        <div class="product-options-card">
+          <div class="option-group">
+            <label class="option-label-card">Size:</label>
+            <select class="option-select-card product-size">
+              <option value="S">Small (S)</option>
+              <option value="M" selected>Medium (M)</option>
+              <option value="L">Large (L)</option>
+              <option value="XL">Extra Large (XL)</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+          
+          <div class="option-group">
+            <label class="option-label-card">Quantity:</label>
+            <input type="number" min="1" value="1" class="option-input-card product-quantity">
+          </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-name="Cotton Polo Shirt" data-price="1500" data-image="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-  </main>
-
-  <!-- Cart Panel (initially hidden) -->
-  <aside id="cartPanel" 
-         class="fixed top-16 right-4 w-90 max-h-100 bg-gray-800 border border-yellow-400 rounded-lg shadow-lg overflow-auto p-4 hidden z-30">
-    <h2 class="text-yellow-400 text-lg font-bold mb-4">Your Cart</h2>
-    <div id="cartItems" class="flex flex-col gap-4 max-h-72 overflow-auto"></div>
-    <p id="emptyCartMsg" class="text-gray-400 text-center">Your cart is empty.</p>
-    <br>
-    <a href="place-order.html" class="text-yellow-400 text-lg font-bold mb-4" style="margin-left: 95px;">Place Order</a>
-  </aside>
+<!-- Cart Panel -->
+<aside id="cartPanel">
+  <div class="cart-header">
+    <h3 class="cart-title">Your Cart</h3>
+    <button class="close-cart" id="closeCart">&times;</button>
+  </div>
+  
+  <div id="cartItems"></div>
+  
+  <p id="emptyCartMsg" class="text-center py-5">Your cart is empty.</p>
+  
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span class="total-label">Total:</span>
+      <span class="total-amount" id="cartTotal">Rs. 0</span>
+    </div>
+    
+    <a href="place-order.html" class="checkout-btn">Place Order</a>
+  </div>
+</aside>
 
 <script>
+  // Navigation functions
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "280px";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+  
+  // Change main image function
+  function changeImage(element, newSrc) {
+    document.getElementById('mainImage').src = newSrc;
+    
+    // Update active thumbnail
+    document.querySelectorAll('.thumbnail').forEach(thumb => {
+      thumb.classList.remove('active');
+    });
+    element.classList.add('active');
+  }
+  
+  // Color selection
+  document.querySelectorAll('.color-option').forEach(option => {
+    option.addEventListener('click', function() {
+      document.querySelectorAll('.color-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      this.classList.add('selected');
+    });
+  });
+  
+  // Update total price based on quantity
+  function updateTotalPrice() {
+    const quantity = parseInt(document.getElementById('quantityInput').value);
+    const price = 2000;
+    const total = quantity * price;
+    document.getElementById('totalPrice').textContent = total.toLocaleString();
+  }
+  
+  // Quantity controls
+  document.getElementById('increaseQty').addEventListener('click', function() {
+    const input = document.getElementById('quantityInput');
+    input.value = parseInt(input.value) + 1;
+    updateTotalPrice();
+  });
+  
+  document.getElementById('decreaseQty').addEventListener('click', function() {
+    const input = document.getElementById('quantityInput');
+    if (parseInt(input.value) > 1) {
+      input.value = parseInt(input.value) - 1;
+      updateTotalPrice();
+    }
+  });
+  
+  document.getElementById('quantityInput').addEventListener('change', function() {
+    if (parseInt(this.value) < 1) this.value = 1;
+    updateTotalPrice();
+  });
+  
+  // Cart functionality
   document.addEventListener('DOMContentLoaded', () => {
+    // Initialize total price
+    updateTotalPrice();
+    
     // Elements references
     const addToCartBtn = document.getElementById('addToCartBtn');
     const cartPanel = document.getElementById('cartPanel');
@@ -156,131 +1597,198 @@
     const cartItemsContainer = document.getElementById('cartItems');
     const cartCount = document.getElementById('cartCount');
     const emptyCartMsg = document.getElementById('emptyCartMsg');
+    const closeCart = document.getElementById('closeCart');
+    const cartTotal = document.getElementById('cartTotal');
     const quantityInput = document.getElementById('quantityInput');
-    const fabricName = 'Cotton';
+    const fabricName = 'Premium Cotton Fabric';
     const fabricImage = 'images/cotton.jpg';
-    const fabricPrice = 2000; // Store as a number for calculations
+    const fabricPrice = 2000; 
+    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
 
     // Cart data array
     let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
-    // Function to render cart items inside cartPanel
+    // Function to render cart items
     function renderCart() {
-        // Clear current items
-        cartItemsContainer.innerHTML = '';
-        let subtotal = 0; // Total for all items
-        
-        if (cartItems.length === 0) {
-            emptyCartMsg.style.display = 'block';
-        } else {
-            emptyCartMsg.style.display = 'none';
-            cartItems.forEach((item, index) => {
-                const itemDiv = document.createElement('div');
-                itemDiv.classList.add('flex', 'items-center', 'gap-3');
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+      
+      if (cartItems.length === 0) {
+        emptyCartMsg.style.display = 'block';
+      } else {
+        emptyCartMsg.style.display = 'none';
+        cartItems.forEach((item, index) => {
+          const itemTotal = item.quantity * item.price;
+          total += itemTotal;
+          
+          const cartItemElement = document.createElement('div');
+          cartItemElement.className = 'cart-item';
+          cartItemElement.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-item-details">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">Rs. ${itemTotal}</div>
+              <div class="cart-item-meta">
+                <span>Qty: ${item.quantity}</span>
+                ${item.name === fabricName 
+                  ? `<span>(${item.quantity * 10} meters)</span>` 
+                  : (item.size ? `<span>Size: ${item.size}</span>` : '')
+                }
+                ${item.color ? `<span>Color: ${item.color}</span>` : ''}
+                ${item.weight ? `<span>Weight: ${item.weight}</span>` : ''}
+                ${item.weave ? `<span>Weave: ${item.weave}</span>` : ''}
+              </div>
+            </div>
+            <button class="remove-item" data-index="${index}">
+              <i class="fas fa-trash"></i>
+            </button>
+          `;
+          cartItemsContainer.appendChild(cartItemElement);
+        });
+      }
+      
+      // Update cart total
+      cartTotal.textContent = `Rs. ${total}`;
+      
+      // Update cart count
+      cartCount.textContent = cartItems.length;
+      
+      // Add event listeners to remove buttons
+      document.querySelectorAll('.remove-item').forEach(button => {
+        button.addEventListener('click', function() {
+          const index = parseInt(this.getAttribute('data-index'));
+          removeFromCart(index);
+        });
+      });
+    }
+    
+    // Function to add fabric item to cart
+    function addFabricToCart() {
+      const quantity = parseInt(quantityInput.value, 10);
+      // Check if quantity is valid
+      if (isNaN(quantity)) {
+        alert('Please enter a valid quantity');
+        return;
+      }
+      
+      if (quantity < 1) {
+        alert('Minimum order quantity is 10 meters.');
+        return;
+      }
 
-                // Image Thumbnail
-                const img = document.createElement('img');
-                img.src = item.image;
-                img.alt = item.name + ' image';
-                img.classList.add('w-12', 'h-12', 'object-cover', 'rounded');
+      // Get selected options
+      const selectedColor = document.querySelector('.color-option.selected').getAttribute('data-color');
+      const selectedWeight = document.getElementById('weightSelect').value;
+      const selectedWeave = document.getElementById('weaveSelect').value;
 
-                // Name span
-                const name = document.createElement('span');
-                name.textContent = item.name;
-                name.classList.add('flex-grow', 'text-white', 'font-semibold');
-
-                // Quantity span
-                const quantity = document.createElement('span');
-                quantity.textContent ='Qty. '+ item.quantity;
-                quantity.classList.add('flex-grow', 'text-white', 'font-semibold');
-
-                // Subtotal calculation
-                const itemSubtotal = item.quantity * fabricPrice;
-                subtotal += itemSubtotal;
-
-                // Price span
-                const price = document.createElement('span');
-                price.textContent = 'Rs. ' + itemSubtotal;
-                price.classList.add('flex-grow', 'text-white', 'font-semibold');
-
-                // Remove button
-                const removeBtn = document.createElement('button');
-                removeBtn.textContent = '×';
-                removeBtn.title = 'Remove from cart';
-                removeBtn.classList.add('text-red-500', 'text-xl', 'font-bold', 'hover:text-red-700');
-                removeBtn.onclick = () => { removeFromCart(index); };
-
-                itemDiv.appendChild(img);
-                itemDiv.appendChild(name);
-                itemDiv.appendChild(quantity);
-                itemDiv.appendChild(price);
-                itemDiv.appendChild(removeBtn);
-                cartItemsContainer.appendChild(itemDiv);
-            });
-        }
-
-        // Update cart count badge
-        cartCount.textContent = cartItems.length;
-
-        // Update subtotal in the cart
-        const subtotalElem = document.createElement('div');
-        subtotalElem.textContent = 'Subtotal: Rs. ' + subtotal;
-        subtotalElem.classList.add('text-yellow-400', 'font-bold');
-        cartItemsContainer.appendChild(subtotalElem);
+      // Check if product with same options already in cart
+      const existingIndex = cartItems.findIndex(item => 
+        item.name === fabricName &&
+        item.color === selectedColor &&
+        item.weight === selectedWeight &&
+        item.weave === selectedWeave
+      );
+      
+      if (existingIndex !== -1) {
+        // Update quantity if already in cart
+        cartItems[existingIndex].quantity += quantity;
+      } else {
+        // Add new item to cart
+        cartItems.push({ 
+          name: fabricName, 
+          image: fabricImage, 
+          quantity: quantity,
+          price: fabricPrice,
+          color: selectedColor,
+          weight: selectedWeight,
+          weave: selectedWeave
+        });
+      }
+      
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      renderCart();
+      alert(`${quantity * 10} meters of ${fabricName} added to cart!`);
     }
 
-    // Function to add item to cart
-    function addToCart() {
-        const quantity = parseInt(quantityInput.value, 10);
-        // Check if quantity is valid
-        if (isNaN(quantity) || quantity < 1) {
-            alert('Minimum order quantity is 10 meters.');
-            return;
-        }
+    // Function to add product item to cart
+    function addProductToCart(button) {
+      const card = button.closest('.product-card');
+      const name = button.getAttribute('data-name');
+      const price = parseFloat(button.getAttribute('data-price'));
+      const image = button.getAttribute('data-image');
+      const quantity = parseInt(card.querySelector('.product-quantity').value, 10);
+      const sizeElement = card.querySelector('.product-size');
+      const size = sizeElement ? sizeElement.value : null;
 
-        // Check if already in cart - avoid duplicates
-        const existingIndex = cartItems.findIndex(item => item.name === fabricName);
-        if (existingIndex !== -1) {
-            alert(fabricName + ' is already in your cart.');
-            return;
-        }
+      if (isNaN(quantity) || quantity < 1) {
+        alert('Please enter a valid quantity');
+        return;
+      }
 
-        cartItems.push({ name: fabricName, image: fabricImage, quantity: quantity });
-        localStorage.setItem('cartItems', JSON.stringify(cartItems)); // Save to local storage
-        renderCart();
-        alert(fabricName + ' added to cart!');
+      // Check if product with same name and size already in cart
+      const existingIndex = cartItems.findIndex(item => 
+        item.name === name && 
+        ((!item.size && !size) || (item.size === size))
+      );
+
+      if (existingIndex !== -1) {
+        // Update quantity if already in cart
+        cartItems[existingIndex].quantity += quantity;
+      } else {
+        // Add new item to cart
+        cartItems.push({
+          name,
+          price,
+          image,
+          quantity,
+          size
+        });
+      }
+
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      renderCart();
+      alert(`${name} added to cart!`);
     }
 
     // Function to remove item from cart by index
     function removeFromCart(index) {
-        cartItems.splice(index, 1);
-        localStorage.setItem('cartItems', JSON.stringify(cartItems)); // Update local storage
-        renderCart();
+      cartItems.splice(index, 1);
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      renderCart();
     }
 
-    // Toggle cart panel visibility on cart icon click
+    // Toggle cart panel
     cartIcon.addEventListener('click', () => {
-        cartPanel.classList.toggle('hidden');
+      cartPanel.classList.toggle('active');
     });
-
+    
+    // Close cart panel
+    closeCart.addEventListener('click', () => {
+      cartPanel.classList.remove('active');
+    });
+    
+    // Close cart when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!cartPanel.contains(e.target) && 
+          !cartIcon.contains(e.target) && 
+          cartPanel.classList.contains('active')) {
+        cartPanel.classList.remove('active');
+      }
+    });
+    
+    // Add to cart button for fabric
+    addToCartBtn.addEventListener('click', addFabricToCart);
+    
+    // Add to cart buttons for products
+    addToCartBtns.forEach(button => {
+      button.addEventListener('click', function() {
+        addProductToCart(this);
+      });
+    });
+    
     // Initial cart render
     renderCart();
-
-    // Add event listener to button
-    addToCartBtn.addEventListener('click', addToCart);
-});
-
-</script>
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
+  });
 </script>
 </body>
 </html>
-
-

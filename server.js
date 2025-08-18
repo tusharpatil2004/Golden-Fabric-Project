@@ -1,3 +1,4 @@
+// server.js
 const fs = require('fs');
 const fsp = fs.promises;
 const express = require('express');
@@ -53,6 +54,10 @@ app.get('/orders.html', (req, res) => {
 
 app.get('/address.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'address.html'));
+});
+
+app.get('/users.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'users.html'));
 });
 
 // Email transporter setup
@@ -399,9 +404,7 @@ app.get('/api/admin/orders', async (req, res) => {
 app.get('/api/admin/users', async (req, res) => {
   try {
     const users = await readJSONFile(usersDBPath);
-    // Remove passwords before sending
-    const safeUsers = users.map(({ password, ...rest }) => rest);
-    res.json(safeUsers);
+    res.json(users);
   } catch (error) {
     console.error('Error fetching users:', error);
     res.status(500).json({ error: 'Internal server error' });
@@ -454,6 +457,57 @@ app.put('/api/admin/orders/:id/status', async (req, res) => {
   }
 });
 
+// Update user password endpoint
+app.put('/api/admin/users/:id', async (req, res) => {
+  try {
+    const { password } = req.body;
+    if (!password) {
+      return res.status(400).json({ success: false, message: 'Password required' });
+    }
+    
+    let users = await readJSONFile(usersDBPath);
+    const userIndex = users.findIndex(u => u.id === req.params.id);
+    
+    if (userIndex === -1) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+    
+    users[userIndex].password = password;
+    
+    if (await writeJSONFile(usersDBPath, users)) {
+      res.json({ success: true, message: 'Password updated successfully' });
+    } else {
+      res.status(500).json({ success: false, message: 'Failed to update password' });
+    }
+  } catch (error) {
+    console.error('Error updating password:', error);
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  }
+});
+
+// Delete user endpoint
+app.delete('/api/admin/users/:id', async (req, res) => {
+  try {
+    let users = await readJSONFile(usersDBPath);
+    const initialLength = users.length;
+    
+    users = users.filter(user => user.id !== req.params.id);
+    
+    if (users.length === initialLength) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+    
+    if (await writeJSONFile(usersDBPath, users)) {
+      res.json({ success: true, message: 'User deleted successfully' });
+    } else {
+      res.status(500).json({ success: false, message: 'Failed to delete user' });
+    }
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  }
+});
+
 // Start server
 initializeDB().then(() => {
   app.listen(PORT, () => {
@@ -461,6 +515,9 @@ initializeDB().then(() => {
     console.log(`📋 API Endpoints:`);
     console.log(`   POST http://localhost:${PORT}/api/orders          - Submit order`);
     console.log(`   GET  http://localhost:${PORT}/api/admin/orders    - Get all orders`);
+    console.log(`   GET  http://localhost:${PORT}/api/admin/users     - Get all users`);
+    console.log(`   PUT  http://localhost:${PORT}/api/admin/users/:id - Update user password`);
+    console.log(`   DELETE http://localhost:${PORT}/api/admin/users/:id - Delete user`);
     console.log(`   POST http://localhost:${PORT}/api/send-otp        - Send OTP`);
     console.log(`   POST http://localhost:${PORT}/api/register        - Register user`);
     console.log(`   POST http://localhost:${PORT}/api/login           - User login`);

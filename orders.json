@@ -1,145 +1,5 @@
 [
   {
-    "id": "5e2d0f76-f506-4fa7-851c-b64530e2eb75",
-    "name": "Tushar Patil",
-    "mobile": "9090909088",
-    "email": "metusharpatil8@gmail.com",
-    "address": "hello fabric",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      },
-      {
-        "name": "Nylon",
-        "image": "images/nylon.jpg",
-        "quantity": 2
-      }
-    ],
-    "subtotal": 6000,
-    "tax": 300,
-    "total": 6300,
-    "date": "2025-07-23T16:09:04.478Z",
-    "orderId": "1753286944478",
-    "status": "Processing",
-    "createdAt": "2025-07-23T16:09:04.532Z",
-    "updatedAt": "2025-08-03T08:15:32.322Z",
-    "screenshot": null
-  },
-  {
-    "id": "cadbf068-bd03-4270-a74e-b7f0dccdff66",
-    "name": "tushar Patil",
-    "mobile": "9898989989",
-    "email": "test@test.com",
-    "address": "test",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 2000,
-    "tax": 100,
-    "total": 2100,
-    "date": "2025-07-30T12:08:23.581Z",
-    "orderId": "1753877303581",
-    "status": "Shipped",
-    "createdAt": "2025-07-30T12:08:23.594Z",
-    "updatedAt": "2025-08-03T08:15:42.141Z",
-    "screenshot": null
-  },
-  {
-    "id": "c1b3b754-272a-4325-b43b-88b3353c8f27",
-    "name": "Milind Patil",
-    "mobile": "7058776863",
-    "email": "XYZXYZ@test.com",
-    "address": "test",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      },
-      {
-        "name": "Canvas",
-        "image": "images/Canvas.jpg",
-        "quantity": 2
-      }
-    ],
-    "subtotal": 6000,
-    "tax": 300,
-    "total": 6300,
-    "date": "2025-07-31T16:41:35.651Z",
-    "orderId": "1753980095651",
-    "status": "Received",
-    "createdAt": "2025-07-31T16:41:35.677Z",
-    "updatedAt": "2025-07-31T16:41:35.677Z",
-    "screenshot": null
-  },
-  {
-    "id": "ce827858-10f3-4f4b-898e-8053c8d02653",
-    "name": "Tanmay Patil",
-    "mobile": "9839878783",
-    "email": "test@test.com",
-    "address": "address xyz",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      },
-      {
-        "name": "Nylon",
-        "image": "images/nylon.jpg",
-        "quantity": 2
-      },
-      {
-        "name": "Chenille",
-        "image": "images/chenille.jpg",
-        "quantity": 4
-      }
-    ],
-    "subtotal": 14000,
-    "tax": 700,
-    "total": 14700,
-    "date": "2025-07-31T17:59:23.357Z",
-    "orderId": "1753984763357",
-    "status": "Delivered",
-    "createdAt": "2025-07-31T17:59:23.380Z",
-    "updatedAt": "2025-08-03T08:15:49.458Z",
-    "screenshot": null
-  },
-  {
-    "id": "0f6f059f-4c55-4b7c-a1ef-9257ce33687f",
-    "name": "tushar",
-    "mobile": "6666666666",
-    "email": "test@test.com",
-    "address": "66",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Chenille",
-        "image": "images/chenille.jpg",
-        "quantity": 4
-      }
-    ],
-    "subtotal": 8000,
-    "tax": 400,
-    "total": 8400,
-    "date": "2025-07-31T18:00:18.011Z",
-    "orderId": "1753984818011",
-    "status": "Delivered",
-    "createdAt": "2025-07-31T18:00:18.020Z",
-    "updatedAt": "2025-08-03T08:15:56.013Z",
-    "screenshot": null
-  },
-  {
     "id": "437d4cb6-d2a9-43a1-9b68-7cf93d5d6b11",
     "name": "TUSHAR TEST ORDER",
     "mobile": "6737737373",
@@ -158,33 +18,9 @@
     "total": 8400,
     "date": "2025-07-31T18:14:59.025Z",
     "orderId": "1753985699025",
-    "status": "Cancelled",
+    "status": "Delivered",
     "createdAt": "2025-07-31T18:14:59.036Z",
-    "updatedAt": "2025-08-03T08:15:59.766Z",
-    "screenshot": null
-  },
-  {
-    "id": "f1bc8d64-7ed4-43c7-9ee0-93e6f575cf7d",
-    "name": "karan tandel",
-    "mobile": "7777777777",
-    "email": "test@test.com",
-    "address": "test",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 2000,
-    "tax": 100,
-    "total": 2100,
-    "date": "2025-07-31T18:22:49.786Z",
-    "orderId": "1753986169786",
-    "status": "Processing",
-    "createdAt": "2025-07-31T18:22:49.795Z",
-    "updatedAt": "2025-08-03T08:18:23.218Z",
+    "updatedAt": "2025-08-11T16:56:28.738Z",
     "screenshot": null
   },
   {
@@ -217,59 +53,6 @@
     "screenshot": null
   },
   {
-    "id": "eddadbe9-750a-40d9-8a2e-3e7bca35fb3e",
-    "name": "tushar",
-    "mobile": "6666666666",
-    "email": "test@test.com",
-    "address": "666",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Nylon",
-        "image": "images/nylon.jpg",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 2000,
-    "tax": 100,
-    "total": 2100,
-    "date": "2025-07-31T18:41:26.017Z",
-    "orderId": "1753987286017",
-    "status": "Received",
-    "createdAt": "2025-07-31T18:41:26.025Z",
-    "updatedAt": "2025-07-31T18:41:26.025Z",
-    "screenshot": null
-  },
-  {
-    "id": "1ba0a51b-d74f-40f0-b44f-a82c8dbde7d0",
-    "name": "TUSHAR TEST ORDER",
-    "mobile": "5555555555",
-    "email": "TEST@TEST.com",
-    "address": "hthhththt",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      },
-      {
-        "name": "Canvas",
-        "image": "images/Canvas.jpg",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 4000,
-    "tax": 200,
-    "total": 4200,
-    "date": "2025-07-31T18:52:08.662Z",
-    "orderId": "1753987928662",
-    "status": "Received",
-    "createdAt": "2025-07-31T18:52:08.670Z",
-    "updatedAt": "2025-07-31T18:52:08.670Z",
-    "screenshot": null
-  },
-  {
     "id": "6cccc915-e690-46b7-b2c1-2a9c74a24e6f",
     "name": "Tanmay Patil",
     "mobile": "5555666666",
@@ -288,189 +71,10 @@
     "total": 2100,
     "date": "2025-07-31T18:55:52.484Z",
     "orderId": "1753988152484",
-    "status": "Received",
+    "status": "Delivered",
     "createdAt": "2025-07-31T18:55:52.510Z",
-    "updatedAt": "2025-07-31T18:55:52.510Z",
+    "updatedAt": "2025-08-11T16:58:16.450Z",
     "screenshot": "/uploads/1753988152498-images.png"
-  },
-  {
-    "id": "f9c6ad94-e987-4166-a10b-40455c003ff3",
-    "name": "Sakshi Tandel",
-    "mobile": "9999999999",
-    "email": "sakshitandel039@gmail.com",
-    "address": "jambrung",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Canvas",
-        "image": "images/Canvas.jpg",
-        "quantity": 2
-      },
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      },
-      {
-        "name": "Velvet",
-        "image": "images/velvet.jpg",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 8000,
-    "tax": 400,
-    "total": 8400,
-    "date": "2025-08-02T10:54:37.499Z",
-    "orderId": "1754132077499",
-    "status": "Received",
-    "createdAt": "2025-08-02T10:54:37.508Z",
-    "updatedAt": "2025-08-02T10:54:37.508Z",
-    "screenshot": null
-  },
-  {
-    "id": "07c4aeee-53d3-4936-9d85-1edec0a73f31",
-    "name": "Shubham Karale",
-    "mobile": "7080788907",
-    "email": "shubhamkarale2005@gmail.com",
-    "address": "jambrung",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      },
-      {
-        "name": "Nylon",
-        "image": "images/nylon.jpg",
-        "quantity": 1
-      },
-      {
-        "name": "Canvas",
-        "image": "images/Canvas.jpg",
-        "quantity": 2
-      }
-    ],
-    "subtotal": 8000,
-    "tax": 400,
-    "total": 8400,
-    "date": "2025-08-02T16:00:48.712Z",
-    "orderId": "1754150448712",
-    "status": "Received",
-    "createdAt": "2025-08-02T16:00:48.727Z",
-    "updatedAt": "2025-08-02T16:00:48.727Z",
-    "screenshot": null
-  },
-  {
-    "id": "cadbf068-bd03-4270-a74e-b7f0dccdff66",
-    "name": "tushar Patil",
-    "mobile": "9898989989",
-    "email": "test@test.com",
-    "address": "test",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 2000,
-    "tax": 100,
-    "total": 2100,
-    "date": "2025-07-30T12:08:23.581Z",
-    "orderId": "1753877303581",
-    "status": "Received",
-    "createdAt": "2025-07-30T12:08:23.594Z",
-    "updatedAt": "2025-07-30T12:08:23.594Z",
-    "screenshot": null
-  },
-  {
-    "id": "c1b3b754-272a-4325-b43b-88b3353c8f27",
-    "name": "Milind Patil",
-    "mobile": "7058776863",
-    "email": "XYZXYZ@test.com",
-    "address": "test",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      },
-      {
-        "name": "Canvas",
-        "image": "images/Canvas.jpg",
-        "quantity": 2
-      }
-    ],
-    "subtotal": 6000,
-    "tax": 300,
-    "total": 6300,
-    "date": "2025-07-31T16:41:35.651Z",
-    "orderId": "1753980095651",
-    "status": "Received",
-    "createdAt": "2025-07-31T16:41:35.677Z",
-    "updatedAt": "2025-07-31T16:41:35.677Z",
-    "screenshot": null
-  },
-  {
-    "id": "ce827858-10f3-4f4b-898e-8053c8d02653",
-    "name": "Tanmay Patil",
-    "mobile": "9839878783",
-    "email": "test@test.com",
-    "address": "address xyz",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      },
-      {
-        "name": "Nylon",
-        "image": "images/nylon.jpg",
-        "quantity": 2
-      },
-      {
-        "name": "Chenille",
-        "image": "images/chenille.jpg",
-        "quantity": 4
-      }
-    ],
-    "subtotal": 14000,
-    "tax": 700,
-    "total": 14700,
-    "date": "2025-07-31T17:59:23.357Z",
-    "orderId": "1753984763357",
-    "status": "Received",
-    "createdAt": "2025-07-31T17:59:23.380Z",
-    "updatedAt": "2025-07-31T17:59:23.380Z",
-    "screenshot": null
-  },
-  {
-    "id": "0f6f059f-4c55-4b7c-a1ef-9257ce33687f",
-    "name": "tushar",
-    "mobile": "6666666666",
-    "email": "test@test.com",
-    "address": "66",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Chenille",
-        "image": "images/chenille.jpg",
-        "quantity": 4
-      }
-    ],
-    "subtotal": 8000,
-    "tax": 400,
-    "total": 8400,
-    "date": "2025-07-31T18:00:18.011Z",
-    "orderId": "1753984818011",
-    "status": "Received",
-    "createdAt": "2025-07-31T18:00:18.020Z",
-    "updatedAt": "2025-07-31T18:00:18.020Z",
-    "screenshot": null
   },
   {
     "id": "437d4cb6-d2a9-43a1-9b68-7cf93d5d6b11",
@@ -497,30 +101,6 @@
     "screenshot": null
   },
   {
-    "id": "f1bc8d64-7ed4-43c7-9ee0-93e6f575cf7d",
-    "name": "karan tandel",
-    "mobile": "7777777777",
-    "email": "test@test.com",
-    "address": "test",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 2000,
-    "tax": 100,
-    "total": 2100,
-    "date": "2025-07-31T18:22:49.786Z",
-    "orderId": "1753986169786",
-    "status": "Received",
-    "createdAt": "2025-07-31T18:22:49.795Z",
-    "updatedAt": "2025-07-31T18:22:49.796Z",
-    "screenshot": null
-  },
-  {
     "id": "73ae8d75-7fc4-4569-9e57-0c6e852d9ad7",
     "name": "Tanmay Patil",
     "mobile": "6767676767",
@@ -550,59 +130,6 @@
     "screenshot": null
   },
   {
-    "id": "eddadbe9-750a-40d9-8a2e-3e7bca35fb3e",
-    "name": "tushar",
-    "mobile": "6666666666",
-    "email": "test@test.com",
-    "address": "666",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Nylon",
-        "image": "images/nylon.jpg",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 2000,
-    "tax": 100,
-    "total": 2100,
-    "date": "2025-07-31T18:41:26.017Z",
-    "orderId": "1753987286017",
-    "status": "Received",
-    "createdAt": "2025-07-31T18:41:26.025Z",
-    "updatedAt": "2025-07-31T18:41:26.025Z",
-    "screenshot": null
-  },
-  {
-    "id": "1ba0a51b-d74f-40f0-b44f-a82c8dbde7d0",
-    "name": "TUSHAR TEST ORDER",
-    "mobile": "5555555555",
-    "email": "TEST@TEST.com",
-    "address": "hthhththt",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Cotton",
-        "image": "images/cotton.jpg",
-        "quantity": 1
-      },
-      {
-        "name": "Canvas",
-        "image": "images/Canvas.jpg",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 4000,
-    "tax": 200,
-    "total": 4200,
-    "date": "2025-07-31T18:52:08.662Z",
-    "orderId": "1753987928662",
-    "status": "Received",
-    "createdAt": "2025-07-31T18:52:08.670Z",
-    "updatedAt": "2025-07-31T18:52:08.670Z",
-    "screenshot": null
-  },
-  {
     "id": "6cccc915-e690-46b7-b2c1-2a9c74a24e6f",
     "name": "Tanmay Patil",
     "mobile": "5555666666",
@@ -625,30 +152,6 @@
     "createdAt": "2025-07-31T18:55:52.510Z",
     "updatedAt": "2025-07-31T18:55:52.510Z",
     "screenshot": "/uploads/1753988152498-images.png"
-  },
-  {
-    "id": "6c84654b-08d1-4e89-9b46-edb5be8da7a5",
-    "name": "Milind Patil",
-    "mobile": "1010111001",
-    "email": "dhdh@v.com",
-    "address": "test",
-    "paymentMethod": "cod",
-    "items": [
-      {
-        "name": "Velvet",
-        "image": "images/velvet.jpg",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 2000,
-    "tax": 100,
-    "total": 2100,
-    "date": "2025-08-03T16:37:32.561Z",
-    "orderId": "1754239052562",
-    "status": "Received",
-    "createdAt": "2025-08-03T16:37:32.585Z",
-    "updatedAt": "2025-08-03T16:37:32.585Z",
-    "screenshot": null
   },
   {
     "id": "61a5c523-a3a4-401c-93cd-1d0380de40fb",
@@ -693,5 +196,327 @@
     "createdAt": "2025-08-04T08:42:21.074Z",
     "updatedAt": "2025-08-04T08:42:21.074Z",
     "screenshot": null
+  },
+  {
+    "id": "676fbd94-226c-495b-931e-2d542f9751ba",
+    "name": "jampa",
+    "mobile": "0000000000",
+    "email": "jampa@gmail.com",
+    "address": "England",
+    "paymentMethod": "cod",
+    "items": [
+      {
+        "name": "Cotton",
+        "image": "images/cotton.jpg",
+        "quantity": 1
+      }
+    ],
+    "subtotal": 2000,
+    "tax": 100,
+    "total": 2100,
+    "date": "2025-08-06T15:52:22.996Z",
+    "orderId": "1754495542996",
+    "status": "Shipped",
+    "createdAt": "2025-08-06T15:52:23.013Z",
+    "updatedAt": "2025-08-06T15:53:27.005Z",
+    "screenshot": null
+  },
+  {
+    "id": "9762b671-bdc5-4259-b517-80fb05b13b8c",
+    "name": "tushar",
+    "mobile": "9879686867",
+    "email": "test@test.com",
+    "address": "hi",
+    "paymentMethod": "cod",
+    "items": [
+      {
+        "name": "Nylon",
+        "image": "images/nylon.jpg",
+        "quantity": 1
+      },
+      {
+        "name": "Chenille",
+        "image": "images/chenille.jpg",
+        "quantity": 1
+      },
+      {
+        "name": "Cotton",
+        "image": "images/cotton.jpg",
+        "quantity": 1
+      }
+    ],
+    "subtotal": 6000,
+    "tax": 300,
+    "total": 6300,
+    "date": "2025-08-06T16:50:44.985Z",
+    "orderId": "1754499044985",
+    "status": "Received",
+    "createdAt": "2025-08-06T16:50:45.005Z",
+    "updatedAt": "2025-08-06T16:50:45.005Z",
+    "screenshot": null
+  },
+  {
+    "id": "f1933475-258a-4119-87fe-9b2a8b90a86f",
+    "name": "Tushar Naresh Patil",
+    "mobile": "0000065556",
+    "email": "metusharpatil8@gmail.com",
+    "address": "JAMB",
+    "paymentMethod": "cod",
+    "items": [
+      {
+        "name": "Premium Cotton Fabric",
+        "image": "https://images.unsplash.com/photo-1520013573795-38516d2661e4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=600",
+        "price": 2000,
+        "quantity": 3,
+        "type": "Fabric"
+      },
+      {
+        "name": "Cotton T-Shirt",
+        "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=600",
+        "price": 1200,
+        "quantity": 2,
+        "type": "Apparel"
+      },
+      {
+        "name": "Cotton Jeans",
+        "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=600",
+        "price": 2500,
+        "quantity": 1,
+        "type": "Apparel"
+      }
+    ],
+    "subtotal": 10900,
+    "tax": 545,
+    "total": 11445,
+    "date": "2025-08-08T12:03:01.190Z",
+    "orderId": "ORD-1754654581191",
+    "status": "Received",
+    "createdAt": "2025-08-08T12:03:01.425Z",
+    "updatedAt": "2025-08-08T12:03:01.425Z",
+    "screenshot": null
+  },
+  {
+    "id": "38ced22e-2b31-4847-8f33-a3a34ea5475d",
+    "name": "Sakshi Yogesh Tandel",
+    "mobile": "0000065556",
+    "email": "metusharpatil8@gmail.com",
+    "address": "JAMB",
+    "paymentMethod": "cod",
+    "items": [
+      {
+        "name": "Premium Cotton Fabric",
+        "image": "https://images.unsplash.com/photo-1520013573795-38516d2661e4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=600",
+        "price": 2000,
+        "quantity": 3,
+        "type": "Fabric"
+      },
+      {
+        "name": "Cotton T-Shirt",
+        "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=600",
+        "price": 1200,
+        "quantity": 2,
+        "type": "Apparel"
+      },
+      {
+        "name": "Cotton Jeans",
+        "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=600",
+        "price": 2500,
+        "quantity": 1,
+        "type": "Apparel"
+      }
+    ],
+    "subtotal": 10900,
+    "tax": 545,
+    "total": 11445,
+    "date": "2025-08-08T12:03:58.593Z",
+    "orderId": "ORD-1754654638594",
+    "status": "Received",
+    "createdAt": "2025-08-08T12:03:58.707Z",
+    "updatedAt": "2025-08-08T12:03:58.707Z",
+    "screenshot": null
+  },
+  {
+    "id": "512545e8-a714-4c62-9073-c98c8cd74c59",
+    "name": "Tushar Naresh Patil",
+    "mobile": "2432453436",
+    "email": "metusharpatil8@gmail.com",
+    "address": "gt",
+    "paymentMethod": "cod",
+    "items": [
+      {
+        "name": "Premium Cotton Fabric",
+        "image": "https://images.unsplash.com/photo-1520013573795-38516d2661e4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=600",
+        "price": 2000,
+        "quantity": 3,
+        "type": "Fabric"
+      },
+      {
+        "name": "Cotton T-Shirt",
+        "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=600",
+        "price": 1200,
+        "quantity": 2,
+        "type": "Apparel"
+      },
+      {
+        "name": "Cotton Jeans",
+        "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=600",
+        "price": 2500,
+        "quantity": 1,
+        "type": "Apparel"
+      }
+    ],
+    "subtotal": 10900,
+    "tax": 545,
+    "total": 11445,
+    "date": "2025-08-08T12:06:43.433Z",
+    "orderId": "ORD-1754654803433",
+    "status": "Received",
+    "createdAt": "2025-08-08T12:06:43.499Z",
+    "updatedAt": "2025-08-08T12:06:43.499Z",
+    "screenshot": null
+  },
+  {
+    "id": "6ee39f74-5b65-4778-8fde-61b9568b7314",
+    "name": "KARAN TANDEL",
+    "mobile": "1919190000",
+    "email": "KARAN@test.com",
+    "address": "KARJAT 420201",
+    "paymentMethod": "cod",
+    "items": [
+      {
+        "name": "Cotton",
+        "image": "images/cotton.jpg",
+        "quantity": 1,
+        "price": 2000
+      },
+      {
+        "name": "Cotton T-Shirt",
+        "price": 1200,
+        "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500",
+        "quantity": 1,
+        "size": "M"
+      },
+      {
+        "name": "Cotton Pajamas",
+        "price": 1700,
+        "image": "https://images.unsplash.com/photo-1593030103066-0093718efeb9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500",
+        "quantity": 1,
+        "size": "M"
+      },
+      {
+        "name": "Cotton Bed Sheets",
+        "price": 3200,
+        "image": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500",
+        "quantity": 1,
+        "size": null
+      },
+      {
+        "name": "Cotton Towels",
+        "price": 850,
+        "image": "https://images.unsplash.com/photo-1601823984263-b87b59798b70?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500",
+        "quantity": 1,
+        "size": null
+      },
+      {
+        "name": "Cotton Dress",
+        "price": 2200,
+        "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500",
+        "quantity": 1,
+        "size": "M"
+      }
+    ],
+    "subtotal": 11150,
+    "tax": 557.5,
+    "total": 11707.5,
+    "date": "2025-08-08T18:23:23.997Z",
+    "orderId": "ORD-1754677403997",
+    "status": "Received",
+    "createdAt": "2025-08-08T18:23:24.119Z",
+    "updatedAt": "2025-08-08T18:23:24.119Z",
+    "screenshot": null
+  },
+  {
+    "id": "e0b1041d-48db-4ea8-b429-56498a458fd6",
+    "name": "TUSHAR TEST ORDER",
+    "mobile": "5243523523",
+    "email": "TEST@TEST.com",
+    "address": "Jambrung",
+    "paymentMethod": "cod",
+    "items": [
+      {
+        "name": "Premium Cotton Fabric",
+        "image": "images/cotton.jpg",
+        "quantity": 2,
+        "price": 2000,
+        "color": "Gray",
+        "weight": "Heavyweight (220gsm)",
+        "weave": "Twill Weave"
+      },
+      {
+        "name": "Cotton Shirt",
+        "price": 1800,
+        "image": "https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500",
+        "quantity": 1,
+        "size": "M"
+      },
+      {
+        "name": "Cotton Jeans",
+        "price": 2500,
+        "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500",
+        "quantity": 1,
+        "size": "32"
+      }
+    ],
+    "subtotal": 8300,
+    "tax": 415,
+    "total": 8715,
+    "date": "2025-08-10T11:04:33.020Z",
+    "orderId": "ORD-1754823873020",
+    "status": "Received",
+    "createdAt": "2025-08-10T11:04:33.152Z",
+    "updatedAt": "2025-08-10T11:04:33.152Z",
+    "screenshot": null
+  },
+  {
+    "id": "febb1df9-0e6c-4e6f-9e07-66345bf6d6b9",
+    "name": "Tushar p",
+    "mobile": "8787875656",
+    "email": "xuz@test.com",
+    "address": "Hello",
+    "paymentMethod": "online",
+    "items": [
+      {
+        "name": "Premium Cotton Fabric",
+        "image": "images/cotton.jpg",
+        "quantity": 2,
+        "price": 2000,
+        "color": "Sky Blue",
+        "weight": "Heavyweight (220gsm)",
+        "weave": "Satin Weave"
+      },
+      {
+        "name": "Cotton T-Shirt",
+        "price": 1200,
+        "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500",
+        "quantity": 2,
+        "size": "M"
+      },
+      {
+        "name": "Cotton Shirt",
+        "price": 1800,
+        "image": "https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&w=500",
+        "quantity": 1,
+        "size": "M"
+      }
+    ],
+    "subtotal": 8200,
+    "tax": 410,
+    "total": 8610,
+    "date": "2025-08-12T11:32:55.246Z",
+    "orderId": "ORD-1754998375246",
+    "status": "Received",
+    "createdAt": "2025-08-12T11:32:55.352Z",
+    "updatedAt": "2025-08-12T11:32:55.352Z",
+    "screenshot": "/uploads/1754998375340-images.png"
   }
 ]
